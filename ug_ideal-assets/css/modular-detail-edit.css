@@ -1,0 +1,15 @@
+.modular-edit-image_wrapper {
+	position: relative;
+	overflow: hidden;
+}
+.modular-edit-image {
+	z-index: -1;
+	position: absolute;
+}
+
+.modular-edit-interior {
+	width: 100%;
+	position: absolute;
+	top:50%;
+	left:0;
+}

@@ -1,0 +1,211 @@
+
+.wallpaper-wall_wrapper {
+	display:flex;
+  position: relative;
+}
+
+.wallpaper-wall {
+	height: 450px;
+	width: 750;
+	position: relative;
+	overflow: hidden;
+	margin: auto;
+	outline: 1px solid rgba(0, 0, 0, 0.2);
+  background: grey;
+}
+
+.wallpaper-image {
+	position:absolute;
+	top:0;
+	left: 0;
+  max-width: 200% !important;
+}
+
+.wallpaper-wall_height {
+	position: absolute;
+	top: 0;
+	left:0;
+	width:100%;
+	background: rgba(250, 250, 250, 0.8);
+}
+
+.wallpaper-wall_height-bottom {
+  position: absolute;
+  bottom: 0;
+  left:0;
+  width:100%;
+  background: rgba(250, 250, 250, 0.8);
+}
+
+.wallpaper-wall_width {
+	position: absolute;
+	top: 0;
+	right:0;
+	height:100%;
+	background: rgba(250, 250, 250, 0.8);
+}
+
+.wallpaper-wall_width-left {
+  position: absolute;
+  top: 0;
+  left:0;
+  height:100%;
+  background: rgba(250, 250, 250, 0.8);
+}
+
+.wallpaper-axix_X {
+  position: absolute;
+  bottom: 20px;
+  left:0;
+  height: 0;
+  border-top: 1px dashed black;
+  border-bottom: 1px dashed white;
+  text-align: center;
+  z-index: 1;
+}
+
+.wallpaper-axix_Y {
+  position: absolute;
+  bottom: 0;
+  left:20px;
+  width: 0;
+  border-right: 1px dashed grey;
+  border-left: 1px dashed white;
+  writing-mode: vertical-rl; 
+  text-align: center;
+  z-index: 1;
+}
+
+.wallpaper-axix_X span,
+.wallpaper-axix_Y span {
+  background: rgba(250, 250, 250, 0.9);
+  color: blue;
+}
+
+.wallpaper-roll-tape {
+  position: absolute;
+  bottom:-100px;
+  left:0;
+  height:1000px;
+  display: flex;
+  width: 1000%;
+}
+
+.wallpaper-roll {
+	position: relative;
+  height:100%;
+  border-right: 1px dotted white;
+  opacity: 0.5;
+}
+
+.wallpaper-roll::after {
+	content: '';
+	position: absolute;
+	height: 100%;
+	width: 0;
+	right:0;
+	top:0;
+	border-left: 1px dotted black;
+}
+
+.wallpaper-popup_wrapper {
+	position: fixed;
+	top:0;
+	left:0;
+	width: 100vw;
+	height: 0vh;
+	background: rgba(0, 0, 0, 0.4);
+	display: flex;
+	overflow: hidden;
+	z-index: 3;
+  margin:0;
+  padding: 0;
+}
+
+.wallpaper-popup {
+	margin: auto;
+	background: white;
+  padding: 20px;
+  min-width: 300px;
+}
+
+.wallpaper-popup .slick-arrow {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  z-index: 1;
+/*  padding: 5px;*/
+}
+
+.wallpaper-popup .slick-arrow::before {
+  font-size: 30px;
+  color: orange;
+  opacity:1;
+}
+
+.textures-popup-slider-item {
+	background-repeat: no-repeat;
+	background-position: top;
+	background-size: 100% 75%;
+	position: relative;
+	height: auto !important;
+	max-height: 80vh;
+}
+
+.textures-popup-slider-item-texture {
+  width:100%;
+  opacity: 0.5;
+  /*position: absolute;
+  top:0;
+  left:0;*/
+  height: auto;
+}
+
+.textures-popup-slider-item-img {
+	position: absolute;
+	bottom: 25%;
+	left:0;
+	width: 100%;
+	height: auto;
+	opacity: 0.5;
+}
+
+.textures-popup-slider-item-button {
+	/*position: absolute;
+	bottom:0;
+	left:0;*/
+}
+
+.modular_detail-favorite-icon {
+  position: absolute;
+  top: -40px;
+  right: 5px;
+  height: 50px;
+  width: 50px;
+  font-size: 32px;
+  opacity: 0.5;
+}
+
+.interiorsPopUp_slider {
+  background-repeat: no-repeat;
+  background-position: top;
+  background-size: contain;
+}
+
+
+@media screen and (max-width: 768px){
+	.wallpaper-wall {
+		height: 300px;
+		width: 500px;
+	}
+}
+
+@media screen and (max-width: 576px){
+	.wallpaper-wall {
+		height: 150px;
+		width: 250px;
+	}
+  .textures-popup-slider-item-img {
+    bottom: 35%;
+  }
+}

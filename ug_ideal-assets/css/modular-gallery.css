@@ -1,0 +1,65 @@
+.sidebar-subcategories_list {
+	display: none;
+}
+
+.gallery-item {
+  position: relative;
+  min-height: 300px;
+  transition: 0.5s;
+}
+
+.favorite-item-icon {
+  position: absolute;
+  top: 5px;
+  left: 10px;
+  color: orange;
+  cursor: pointer;
+  font-size: 24px;
+}
+
+.gallery-item-image_inner {
+  width: 60%;
+  min-height: 200px;
+  position: absolute;
+  z-index: -1;
+  top:0;
+  left: 20%;
+  overflow: hidden;
+  transition-duration: 0.5s;
+}
+
+.gallery-item-image {
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  height: auto;
+  max-width: 150%;
+}
+
+.gallery-item-image_wrapper {
+  display: block;
+  transition: 0.5s;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+.gallery-item-image_wrapper:hover {
+  display: block;
+  box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.2);
+  transition: 0.5s;
+}
+
+#gallery-sidebar_toggle {
+  display: none;
+}
+
+@media screen and (max-width: 576px) {
+  #gallery-sidebar_toggle {
+    display: block;
+  }
+}
+@media screen and (max-width: 576px){
+  #gallery-sidebar {
+    display: none;
+  }
+}
