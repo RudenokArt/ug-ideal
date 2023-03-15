@@ -1,4 +1,4 @@
-
+<?php $_SESSION['back_page_url'] = $_SERVER['REQUEST_URI']; ?>
 
 <div class="row" id="imagesView">
 	<?php foreach ($images_list as $key => $value): ?>

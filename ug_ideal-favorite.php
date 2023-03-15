@@ -8,7 +8,7 @@ Template Name: ug_ideal-favorite
 ?>
 
 <?php include_once 'ug_ideal-includes/header.php'; ?>
-
+<?php $_SESSION['back_page_url'] = $_SERVER['REQUEST_URI']; ?>
 <div class="container pt-5 pb-5 ug_ideal-galery">
   <div class="text-uppercase page_title"><?php include_once 'ug_ideal-includes/breadcrumb.php';?></div>
   <div id="ug_ideal-favorite_view">

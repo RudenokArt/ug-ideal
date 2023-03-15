@@ -18,6 +18,14 @@ $categories_list = $wpdb->get_results(
   WHERE `wp_bwg_album`.`slug`="catalog"'
 );
 
+if (isset($_GET['search'])) {
+  $images_list = $wpdb->get_results(
+    'SELECT *
+    FROM `wp_bwg_image`
+    WHERE `alt` LIKE "%'.$_GET['search'].'%"'
+  );
+}
+
 
 if (isset($_GET['category'])) {
   $images_list = $wpdb->get_results(
@@ -38,9 +46,18 @@ include_once 'ug_ideal-includes/header.php';
 
 <link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri();?>/ug_ideal-assets/css/catalog.css">
 <div class="container pt-5 ug_ideal-galery">
+  <pre><?php var_dump(isset($_GET['search'])); ?></pre>
+  <div class="row pt-5 pb-5">
+    <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+      <?php include_once 'ug_ideal-includes/breadcrumb.php'; ?>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+      <?php include_once 'ug_ideal-includes/search-form.php'; ?>
+    </div>
+  </div>
   <?php 
-  include_once 'ug_ideal-includes/breadcrumb.php';
-  if (isset($_GET['category'])) {
+  
+  if (isset($_GET['category']) or isset($_GET['search'])) {
     include_once 'ug_ideal-includes/catalog-images-view.php';
   } else {
     include_once 'ug_ideal-includes/catalog-categories-view.php'; 
