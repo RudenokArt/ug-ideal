@@ -4,7 +4,7 @@
 // post-category: catalog_slider
 include_once '/ug_ideal-core/Classes/Ug_ideal_catalog_slider.php';
 include_once __DIR__.'/admin-header.php'; 
-include_once $theme_path.'/ug_ideal-core/Classes/Ug_ideal_catalog_slider.php';
+include_once $theme_path.'/ug_ideal-core/Ug_ideal_catalog_slider.php';
 $admin_catalog_slider = new Ug_ideal_catalog_slider();
 ?>
 <div class="container pt-5">

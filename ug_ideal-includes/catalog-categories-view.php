@@ -1,3 +1,4 @@
+<div class="h2 text-center text-secondary pb-5">Темы для печати:</div>
 <div class="row">
     <?php foreach ($categories_list as $key => $value): ?>
       <div class="col-12 col-sm-6 col-md-4 col-lg-3 ug_ideal-galery-category-wrapper">
@@ -15,5 +16,3 @@
       </div>
     <?php endforeach ?>
   </div>
-
-<?php include_once 'favorite-counter.php' ?>

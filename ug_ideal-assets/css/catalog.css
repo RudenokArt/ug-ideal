@@ -127,6 +127,39 @@
 	text-align: center;
 }
 
+/*  .slick-prev .slick-arrow*/
+.ug_ideal-catalog_slider{
+}
+
+.ug_ideal-catalog_slider .slick-arrow {
+/*	background: red;*/
+	height: 40px;
+	width: 40px;
+	z-index:1;
+}
+
+.ug_ideal-catalog_slider .slick-next {
+	right: 5px !important;
+}
+
+.ug_ideal-catalog_slider .slick-prev {
+	left: 5px !important;
+}
+
+.ug_ideal-catalog_slider .slick-next::before,
+.ug_ideal-catalog_slider .slick-prev::before{
+  color: grey !important;
+  font-size: 36px;
+}
+
+.ug_ideal-catalog_slider-item img {
+  height: 150px;
+  margin:5px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
 
 @media screen and (max-width: 576px){
 	.ug_ideal-galery-image-popup {
