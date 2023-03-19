@@ -62,6 +62,7 @@ class Ug_ideal_catalog_slider {
   }
 
   function getCheckPostsArr () {
+    $arr = [];
     foreach ($this->posts_arr as $key => $value) {
       $arr[$key] = explode('catalog_slider_', $value->post_name)[1]; 
     }
@@ -105,6 +106,9 @@ class Ug_ideal_catalog_slider {
       FROM `wp_bwg_image`
       WHERE `gallery_id`="'.$_GET['category'].'"'
     );
+    if (!$src_arr) {
+      !$src_arr = [];
+    }
     foreach ($src_arr as $key => $value) {
       if (!in_array($value->id, $this->check_posts_arr)) {
         $arr[] = $value;
