@@ -210,6 +210,15 @@ function true_top_menu_page(){
     'admin_wallpaper_categories' // функция, которая выводит содержимое страницы
   );
 
+  add_submenu_page(
+    'ug_ideal_admin',
+    'Фотокаталог - слайдер', // тайтл страницы
+    'Фотокаталог - слайдер', // текст ссылки в меню
+    'manage_options', // права пользователя, необходимые для доступа к странице
+    'admin-catalog-slider', // ярлык страницы
+    'admin_catalog_slider' // функция, которая выводит содержимое страницы
+  );
+
 
 } 
 
@@ -249,4 +258,7 @@ function admin_wallpaper_categories () {
   include_once 'ug_ideal-includes/admin-wallpaper-categories.php';
 }
 
+function admin_catalog_slider () {
+  include_once 'ug_ideal-includes/admin-catalog-slider.php';
+}
 

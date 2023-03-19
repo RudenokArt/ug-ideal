@@ -29,6 +29,9 @@
       <a class="btn btn-outline-secondary w-100 text-start mb-1" href="?page=admin-wallpaper-categories">
         Фотообои - управление категориями
       </a>
+      <a class="btn btn-outline-secondary w-100 text-start mb-1" href="?page=admin-catalog-slider">
+        Фотокаталог - слайдер
+      </a>
     </div>
   </div>
   <div class="row">
