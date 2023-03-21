@@ -219,6 +219,15 @@ function true_top_menu_page(){
     'admin_catalog_slider' // функция, которая выводит содержимое страницы
   );
 
+  add_submenu_page(
+    'ug_ideal_admin',
+    'Компания, контакты', // тайтл страницы
+    'Компания, контакты', // текст ссылки в меню
+    'manage_options', // права пользователя, необходимые для доступа к странице
+    'admin-company-contacts', // ярлык страницы
+    'admin_company_contacts' // функция, которая выводит содержимое страницы
+  );
+
 
 } 
 
@@ -260,5 +269,9 @@ function admin_wallpaper_categories () {
 
 function admin_catalog_slider () {
   include_once 'ug_ideal-includes/admin-catalog-slider.php';
+}
+
+function admin_company_contacts () {
+  include_once 'ug_ideal-includes/admin-company-contacts.php';
 }
 

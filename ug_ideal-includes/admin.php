@@ -33,6 +33,11 @@
         Фотокаталог - слайдер
       </a>
     </div>
+    <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+      <a href="?page=admin-company-contacts" class="btn btn-outline-secondary w-100 text-start mb-1">
+        Компания, контакты
+      </a>
+    </div>
   </div>
   <div class="row">
     <div class="col pt-5">
