@@ -448,7 +448,6 @@ http://cx57370-wordpress.tw1.ru/wp-content/themes/generatepress/ug_ideal-core/or
       },
 
       ImageOrder: async function (action) {
-        console.clear();
         $('.ug_ideal-preloader-wrapper').css({'display': 'flex'});
         var orderData = new URLSearchParams();
         orderData.set('wallpaper_order_image', this.imageJson);

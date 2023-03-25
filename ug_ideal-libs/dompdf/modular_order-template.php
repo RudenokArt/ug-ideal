@@ -19,32 +19,26 @@
       <td>
         <img src="img/ug-ideal.png" alt="ЮгИдеал" width="100">
       </td>
-      <td><b>Производственная компания "Юг Идеал"</b></td>
+      <td colspan="2"><b>company_name</b></td>
    </tr>
    <tr>
-     <td colspan="2">
-       Краснодарский край г.Новороссийск ул.Мысхакское шоссе 50/10 
-     </td>
+     <td colspan="2">company_address</td>
    </tr>
    <tr>
-     <td colspan="2">
-       тел +7(988) 762 22 69, +7(988) 765 50 66 info@ugideal.ru график: 9:00-18:00
-     </td>
+     <td>company_phones</td>
+     <td>company_email</td>
+   </tr>
+   <tr>
+    <td>Время работы:</td>
+    <td>work_time</td>
    </tr>
    <tr>
      <td><b>ЗАКАЗЧИК:</b></td>
-   </tr>
-   <tr>
-     <td>ФИО:</td>
      <td>customer_fio</td>
    </tr>
    <tr>
-     <td>Email:</td>
-     <td>customer_mail</td>
-   </tr>
-   <tr>
-     <td>тел.:</td>
-     <td>customer_phone</td>
+     <td>Email: customer_mail</td>
+     <td>тел.: customer_phone</td>
    </tr>
  </table>
  <table>
@@ -58,24 +52,21 @@
    <tr>
      <td>Изображение (артикул): </td>
      <td>imageName</td>
-   </tr>
-   <tr>
+     <td> | </td>
      <td>Материал: </td>
      <td>material</td>
    </tr>
    <tr>
      <td>Размер: </td>
      <td>size</td>
-   </tr>
-   <tr>
+     <td> | </td>
      <td>Стоимость: </td>
      <td>amount руб.</td>
    </tr>
    <tr>
      <td>Скидка: </td>
      <td>discount %</td>
-   </tr>
-   <tr>
+     <td> | </td>
      <td>Стоимость со скидкой: </td>
      <td>total руб.</td>
    </tr>

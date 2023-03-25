@@ -108,6 +108,18 @@ $company_contacts = new Company();
 
 
     <div class="col-lg-3 col-md-6 col-sm-12">
+      <div>
+        <div class="h6 text-info">Название компании:</div>
+        <?php print_r($company_contacts->company_name->post_content); ?>
+        <form action="" method="post">
+          <input value="<?php echo $company_contacts->company_name->post_content;?>"
+          class="form-control" type="text" name="post_content">
+          <button name="company_name" value="Y" class="btn btn-outline-success mt-1 w-100">
+            <span class="dashicons dashicons-yes"></span>
+            Изменить
+          </button>
+        </form>
+      </div>
       <div class="h6 text-info">
         График работы:
         <form action="" method="post" class="input-group mb-3">

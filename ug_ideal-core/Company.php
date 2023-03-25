@@ -62,7 +62,43 @@ class Company {
       $this->social_networks = $this->getSocialNetworks();
       $this->social_networks_arr = json_decode($this->social_networks->post_content, true);
     }    
-    
+
+    $this->company_name = $this->getCompanyName();
+    if (isset($_POST['company_name'])) {
+      $this->setCompanyName();
+      $this->company_name = $this->getCompanyName();
+    }
+  }
+
+  function setCompanyName () {
+     $insert = wp_update_post([
+      'ID' => $this->company_name->ID,
+      'post_content' => $_POST['post_content'], 
+    ]);
+    $this->alertShow($insert);
+  }
+
+  function getCompanyName () {
+    $company_name = get_posts([
+      'category_name' => 'company_contacts',
+      'post_type' => 'post',
+      'name' => 'company_name',
+    ]);
+    if (!isset($company_name) or empty($company_name)) {
+      $post_id = wp_insert_post([
+        'post_title' => 'Название компании (сайта)',
+        'post_name' => 'company_name',
+        'post_content' => '',
+        'post_status' => 'publish',
+        'post_category' => [$this->company_contacts_category->cat_ID, ],
+      ], true);
+      $company_name = get_posts([
+        'category_name' => 'company_contacts',
+        'post_type' => 'post',
+        'name' => 'company_name',
+      ]);
+    }
+    return $company_name[0];
   }
 
   function saveSocialNetworks () {
