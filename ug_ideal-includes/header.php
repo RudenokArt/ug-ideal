@@ -61,7 +61,7 @@ $main_menu_arr = wp_get_nav_menu_items($main_menu->term_id);
 					</div>
 				</div>				
 			</div>
-			<div class="col-lg-1 col-md-1 col-sm-2 col-2 h6 text-light">
+			<div class="col-lg-1 col-md-1 col-sm-2 col-2 h4 text-light">
 				<div class="header-drop_menu-wrapper">
 					<i class="fa fa-phone" aria-hidden="true"></i>
 					<div class="header-drop_menu" style="right: -100px;">
