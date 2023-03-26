@@ -63,7 +63,7 @@ $main_menu_arr = wp_get_nav_menu_items($main_menu->term_id);
 			</div>
 			<div class="col-lg-1 col-md-1 col-sm-2 col-2 h6 text-light">
 				<div class="header-drop_menu-wrapper">
-					<span class="dashicons dashicons-phone"></span>
+					<i class="fa fa-phone" aria-hidden="true"></i>
 					<div class="header-drop_menu" style="right: -100px;">
 						<?php foreach ($GLOBALS['company_contacts']->company_phones as $key => $value): ?>
 							<a href="tel:<?php echo $value;?>" class="header-drop_menu-item h5 d-block p-2 m-0">
@@ -79,7 +79,7 @@ $main_menu_arr = wp_get_nav_menu_items($main_menu->term_id);
 			</div>
 			<div class="col-lg-1 col-md-1 col-sm-2 col-2 h4 text-light">
 				<div class="header-drop_menu-wrapper">
-					<span class="dashicons dashicons-location">
+					<i class="fa fa-location-arrow" aria-hidden="true"></i>
 					<div class="header-drop_menu h6" style="right: -50px;">
 						<?php foreach ($GLOBALS['company_contacts']->company_address as $key => $value): ?>
 							<a href="/contacts/" class="header-drop_menu-item d-block p-2 m-0">
