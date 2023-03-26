@@ -1,7 +1,6 @@
 <?php
 require($_SERVER['DOCUMENT_ROOT'].'/wp-load.php');
 $company_data = new Company_data();
-print_r($company_data);
 
 
 /**
@@ -36,6 +35,11 @@ class Company_data {
 		$this->company_phones = json_decode(get_posts([
 			'category_name' => 'company_contacts',
 			'name' => 'company_phones',
+		])[0]->post_content);
+
+		$this->social_networks = json_decode(get_posts([
+			'category_name' => 'company_contacts',
+			'name' => 'social_networks',
 		])[0]->post_content);
 
 		$this->company_address_html = $this->htmlHelper($this->company_address);

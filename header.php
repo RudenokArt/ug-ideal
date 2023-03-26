@@ -43,7 +43,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	 *
 	 * @hooked generate_construct_header - 10
 	 */
-	do_action( 'generate_header' );
+	// do_action( 'generate_header' ); // Старая шапка
 
 	/**
 	 * generate_after_header hook.
@@ -52,7 +52,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	 *
 	 * @hooked generate_featured_page_header - 10
 	 */
-	do_action( 'generate_after_header' );
+	// do_action( 'generate_after_header' ); // Старое меню
 	?>
 
 	<div <?php generate_do_attr( 'page' ); ?>>
@@ -72,3 +72,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 			 * @since 0.1
 			 */
 			do_action( 'generate_inside_container' );
+?>
+
+</div>
+</div>
+
+<?php include_once 'ug_ideal-includes/header.php'; ?>
