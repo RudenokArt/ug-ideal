@@ -54,19 +54,26 @@ $template_size_arr = get_posts([
 	'category_name' => 'modular_template_size',
 	'orderby' => 'title',
 	'order' => 'ASC',
+  'numberposts' => 0,
 ]);
 
 $template_mat_arr = get_posts([
 	'category_name' => 'modular_template_mat',
 	'orderby' => 'title',
 	'order' => 'ASC',
+  'numberposts' => 0,
 ]);
 
 $template_price_arr = get_posts([
 	'category_name' => 'modular_template_price',
 	'orderby' => 'title',
 	'order' => 'ASC',
+  'numberposts' => 0,
 ]);
+
+foreach ($template_price_arr as $key => $value) {
+  $template_price_arr[$key]->post_content = json_decode($template_price_arr[$key]->post_content);
+}
 
 $modular_discount = 0;
 
@@ -182,7 +189,7 @@ $modular_discount = 0;
    Размер:
    <select class="form-select" v-model="templateSize">
     <template v-for="(item, index) in sizeArr" >
-     <option v-bind:value="index">
+     <option v-bind:value="index" v-if="templatePrice[item.ID]">
       {{item.post_title}}
     </option>
   </template>			
@@ -566,6 +573,7 @@ priceArr: function () {
   return JSON.parse(this.priceJson);
 },
 
+
 templatePrice:function () {
   var price = 0;
   for (var i = 0; i < this.priceArr.length; i++) {
@@ -577,6 +585,10 @@ return price;
 },
 
 totalPrice: function () {
+  return Math.floor(
+    this.templatePrice[this.sizeArr[this.templateSize].ID] *
+  (this.matArr[this.templateMat].post_content / 100 + 1)
+  );
   return Math.floor(
    this.templatePrice *
    (this.sizeArr[this.templateSize].post_content / 100 + 1) *

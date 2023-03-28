@@ -5,7 +5,7 @@ if (isset($_POST['add_template_size']) and $_POST['add_template_size'] == "Y") {
 	$template_size_category = get_category_by_slug('modular_template_size');
 	$add_template_size = wp_insert_post([
 		'post_title' => $_POST['post_title'],
-		'post_content' => $_POST['post_content'],
+		// 'post_content' => $_POST['post_content'],
 		'post_category' => [$template_size_category->cat_ID,],
 		'post_status' => 'publish',
 	]);
@@ -50,8 +50,8 @@ include_once __DIR__.'/admin-header.php';
 			<br>
 			<span>Размер:</span>
 			<input type="text" name="post_title" class="form-control" required>
-			<span>Наценка к базовой цене шаблона (%):</span>
-			<input type="number" name="post_content" class="form-control smart_number" required>
+			<!-- <span>Наценка к базовой цене шаблона (%):</span>
+			<input type="number" name="post_content" class="form-control smart_number" required> -->
 			<br>
 			<button class="btn btn-outline-success w-100" name="add_template_size" value="Y" title="Сохранить">
 				<span class="dashicons dashicons-yes"></span>OK
@@ -61,12 +61,12 @@ include_once __DIR__.'/admin-header.php';
 			<table class="table">
 				<tr>
 					<th>Размер</th>
-					<th>Наценка (%)</th>
+					<!-- <th>Наценка (%)</th> -->
 				</tr>
 				<?php foreach ($template_size_arr as $key => $value): ?>
 					<tr>
 						<td><?php echo $value->post_title ?></td>
-						<td><?php echo $value->post_content ?></td>
+						<!-- <td><?php // echo $value->post_content ?></td> -->
 						<td>
 							<form action="" method="post">
 								<button name="delete_template_size" value="<?php echo $value->ID ?>"

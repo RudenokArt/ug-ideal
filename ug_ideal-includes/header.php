@@ -37,11 +37,12 @@ $main_menu = wp_get_nav_menus(['name'=>'Основное меню'])[0];
 $main_menu_arr = wp_get_nav_menu_items($main_menu->term_id);
 ?>
 
-<div class="header pt-3 pb-3" style="background: #3cb2e4;">
+<div class="p-5"></div>
+<div class="header pt-3 pb-1" style="background: #3cb2e4;">
 	<div class="container">
 		<div class="row align-items-center">
 
-			<a href="/" class="col-lg-2 col-md-3 col-sm-4 col-4">
+			<a href="/" class="col-lg-2 col-md-2 col-sm-4 col-4">
 				<img src="<?php echo $theme_url.'/ug_ideal-libs/dompdf/img/ug-ideal.png?='.time(); ?>" class="w-100">
 			</a>
 
@@ -93,7 +94,7 @@ $main_menu_arr = wp_get_nav_menu_items($main_menu->term_id);
 					</div>
 				</div>				
 			</div>
-			<div class="col-lg-1 col-md-1 col-sm-2 col-2 h1 text-light">
+			<div class="col-lg-1 col-md-1 col-sm-2 col-2 h1 text-light d-lg-none d-md-block d-sm-block d-block">
 				<div class="header-drop_menu-wrapper">
 					<i class="fa fa-bars" aria-hidden="true"></i>
 					<div class="header-drop_menu">
@@ -117,6 +118,23 @@ $main_menu_arr = wp_get_nav_menu_items($main_menu->term_id);
 				</div>				
 			</div>
 		</div>
+
+		<div class="header-main_menu-desktop d-lg-block d-md-none d-sm-none d-none p-2 text-center">
+			<?php foreach ($main_menu_arr as $key => $value): ?>
+			<a href="<?php echo $value->url; ?>" class="text-light">
+				<?php echo $value->title; ?>
+			</a>
+		<?php endforeach ?>
+		<?php foreach ($GLOBALS['company_contacts']->social_networks as $key => $value): ?>
+			<?php if ($value): ?>
+				<a href="<?php echo $value; ?>" class="text-light">
+					<i class="fa fa-<?php echo $key;?>" aria-hidden="true"></i>
+				</a>
+			<?php endif ?>
+		<?php endforeach ?>
+		</div>
+		
+
 	</div>
 </div>
 

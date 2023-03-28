@@ -50,9 +50,9 @@ include_once __DIR__.'/admin-header.php';
 			</span>
 			<br>
 			<span>Материал:</span>
-			<input type="text" name="post_title" class="form-control">
+			<input type="text" name="post_title" class="form-control" required>
 			<span>Наценка к базовой стоимости шаблона (%):</span>
-			<input type="number" class="smart_number form-control" name="post_content">
+			<input type="number" class="smart_number form-control" name="post_content" required>
 			<br>
 			<button class="btn btn-outline-success w-100" name="add_template_mat" value="Y" title="Сохранить">
 				<span class="dashicons dashicons-yes"></span>OK
