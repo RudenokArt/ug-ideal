@@ -11,6 +11,14 @@ if (isset($_POST['add_template_size']) and $_POST['add_template_size'] == "Y") {
 	]);
 }
 
+$edit_template_size = false;
+if (isset($_POST['edit_template_size'])) {
+	$edit_template_size = wp_update_post([
+		'ID' => $_POST['edit_template_size'],
+		'post_title' => $_POST['post_title'],
+	]);
+}
+
 $delete_template_size = false;
 if (isset($_POST['delete_template_size'])) {
 	$delete_template_size = wp_delete_post($_POST['delete_template_size'], true);
@@ -26,11 +34,18 @@ $template_size_arr = get_posts([
 include_once __DIR__.'/admin-header.php';
 ?>
 
+<pre><?php print_r($_POST); ?></pre>
 
 <div class="container pt-5">
 	<div class="h1">
 		Размеры для шаблонов модульных картин.
 	</div>
+
+	<?php if ($edit_template_size): ?>
+		<div class="alert alert-success text-center">
+			Изменения внесены в базу данных
+		</div>
+	<?php endif ?>
 
 	<?php if ($add_template_size): ?>
 		<div class="alert alert-success text-center">
@@ -65,7 +80,19 @@ include_once __DIR__.'/admin-header.php';
 				</tr>
 				<?php foreach ($template_size_arr as $key => $value): ?>
 					<tr>
-						<td><?php echo $value->post_title ?></td>
+						<td>
+							<form action="" method="post" class="row">
+								<div class="col-9">
+									<input value="<?php echo $value->post_title;?>" type="text" name="post_title" class="form-control" required>
+								</div>
+								<div class="col-3">
+									<button class="btn btn-outline-success" name="edit_template_size"
+									value="<?php echo $value->ID ?>" title="Сохранить">
+									<span class="dashicons dashicons-yes"></span>
+								</button>
+								</div>								
+							</form>
+						</td>
 						<!-- <td><?php // echo $value->post_content ?></td> -->
 						<td>
 							<form action="" method="post">

@@ -40,99 +40,124 @@ $main_menu_arr = wp_get_nav_menu_items($main_menu->term_id);
 <div class="p-5"></div>
 <div class="header pt-3 pb-1" style="background: #3cb2e4;">
 	<div class="container">
-		<div class="row align-items-center">
 
-			<a href="/" class="col-lg-2 col-md-2 col-sm-4 col-4">
-				<img src="<?php echo $theme_url.'/ug_ideal-libs/dompdf/img/ug-ideal.png?='.time(); ?>" class="w-100">
-			</a>
-
-			<div class="col-lg-6 col-md-6 d-lg-block d-md-block d-sm-none d-none h4 text-light">
+		<div class="row">
+			<div class="col-lg-6 col-md-6 d-lg-block d-md-block d-sm-none d-none text-light">
 				<div><?php echo $GLOBALS['company_contacts']->company_name; ?></div>
 			</div>
-
-			<div class="col-lg-1 col-md-1 col-sm-2 col-2 h4 text-light">
-				<div class="header-drop_menu-wrapper">
-					<i class="fa fa-envelope-o" aria-hidden="true"></i>
-					<div class="header-drop_menu" style="right: -150px;">
-						<?php foreach ($GLOBALS['company_contacts']->company_email as $key => $value): ?>
-							<a href="tel:<?php echo $value;?>" class="header-drop_menu-item h5 d-block p-2 m-0">
-								<?php echo $value; ?>
-							</a>
-						<?php endforeach ?>
-					</div>
-				</div>				
-			</div>
-			<div class="col-lg-1 col-md-1 col-sm-2 col-2 h4 text-light">
-				<div class="header-drop_menu-wrapper">
-					<i class="fa fa-phone" aria-hidden="true"></i>
-					<div class="header-drop_menu" style="right: -100px;">
-						<?php foreach ($GLOBALS['company_contacts']->company_phones as $key => $value): ?>
-							<a href="tel:<?php echo $value;?>" class="header-drop_menu-item h5 d-block p-2 m-0">
-								<?php echo $value; ?>
-							</a>
-						<?php endforeach ?>
-						<div class="text-info p-3">
-							<i class="fa fa-clock-o" aria-hidden="true"></i>
-							<?php echo $GLOBALS['company_contacts']->work_time; ?>
-						</div>
-					</div>
-				</div>				
-			</div>
-			<div class="col-lg-1 col-md-1 col-sm-2 col-2 h4 text-light">
-				<div class="header-drop_menu-wrapper">
-					<i class="fa fa-location-arrow" aria-hidden="true"></i>
-					<div class="header-drop_menu h6" style="right: -50px;">
-						<?php foreach ($GLOBALS['company_contacts']->company_address as $key => $value): ?>
-							<a href="/contacts/" class="header-drop_menu-item d-block p-2 m-0">
-								<?php echo $value; ?>
-							</a>
-						<?php endforeach ?>
-						<div class="text-info p-3">
-							<i class="fa fa-clock-o" aria-hidden="true"></i>
-							<?php echo $GLOBALS['company_contacts']->work_time; ?>
-						</div>
-					</div>
-				</div>				
-			</div>
-			<div class="col-lg-1 col-md-1 col-sm-2 col-2 h1 text-light d-lg-none d-md-block d-sm-block d-block">
-				<div class="header-drop_menu-wrapper">
-					<i class="fa fa-bars" aria-hidden="true"></i>
-					<div class="header-drop_menu">
-						<div class="header-drop_menu-social_networks text-center p-3">
-							<?php foreach ($GLOBALS['company_contacts']->social_networks as $key => $value): ?>
-								<?php if ($value): ?>
-									<a href="<?php echo $value; ?>" class="header-social_networks-item h5 p-2">
-										<i class="fa fa-<?php echo $key;?>" aria-hidden="true"></i>
-									</a>
-								<?php endif ?>
-							<?php endforeach ?>
-						</div>
-						<div class="p2">
-							<?php foreach ($main_menu_arr as $key => $value): ?>
-								<a href="<?php echo $value->url; ?>" class="p-2 d-block h5 header-main_menu-item">
-									<?php echo $value->title; ?>
-								</a>
-							<?php endforeach ?>
-						</div>
-					</div>
-				</div>				
-			</div>
 		</div>
 
-		<div class="header-main_menu-desktop d-lg-block d-md-none d-sm-none d-none p-2 text-center">
-			<?php foreach ($main_menu_arr as $key => $value): ?>
-			<a href="<?php echo $value->url; ?>" class="text-light">
-				<?php echo $value->title; ?>
+		<div class="row">
+			<a href="/" class="col-lg-2 col-md-2 col-sm-2 col-3 p-0">
+				<img 
+				src="<?php echo $theme_url.'/ug_ideal-libs/dompdf/img/ug-ideal.png?='.time(); ?>"
+				class="w-75 d-lg-block d-md-none d-sm-none d-none">
+				<img src="<?php echo $theme_url.'/ug_ideal-libs/dompdf/img/ug-ideal.png?='.time(); ?>"
+				class="w-100 d-lg-none d-md-block d-sm-block d-block">
 			</a>
-		<?php endforeach ?>
-		<?php foreach ($GLOBALS['company_contacts']->social_networks as $key => $value): ?>
-			<?php if ($value): ?>
-				<a href="<?php echo $value; ?>" class="text-light">
-					<i class="fa fa-<?php echo $key;?>" aria-hidden="true"></i>
-				</a>
-			<?php endif ?>
-		<?php endforeach ?>
+			<div class="col-lg-10 col-md-10 col-sm-10 col-9">
+				<div class="row align-items-center justify-content-center">
+
+					<div class="col-lg-1 col-md-1 col-sm-2 col-2 h5 text-light">
+						<div class="header-drop_menu-wrapper">
+							<i class="fa fa-envelope-o" aria-hidden="true"></i>
+							<div class="header-drop_menu" style="right: -200px;">
+								<?php foreach ($GLOBALS['company_contacts']->company_email as $key => $value): ?>
+									<a href="tel:<?php echo $value;?>" class="header-drop_menu-item h5 d-block p-2 m-0">
+										<?php echo $value; ?>
+									</a>
+								<?php endforeach ?>
+							</div>
+						</div>				
+					</div>
+
+					<div class="col-lg-1 col-md-1 col-sm-2 col-2 h5 text-light">
+						<div class="header-drop_menu-wrapper">
+							<i class="fa fa-phone" aria-hidden="true"></i>
+							<div class="header-drop_menu" style="right: -150px;">
+								<?php foreach ($GLOBALS['company_contacts']->company_phones as $key => $value): ?>
+									<a href="tel:<?php echo $value;?>" class="header-drop_menu-item h5 d-block p-2 m-0">
+										<?php echo $value; ?>
+									</a>
+								<?php endforeach ?>
+								<div class="text-info p-3">
+									<i class="fa fa-clock-o" aria-hidden="true"></i>
+									<?php echo $GLOBALS['company_contacts']->work_time; ?>
+								</div>
+							</div>
+						</div>				
+					</div>
+
+					<div class="col-lg-1 col-md-1 col-sm-2 col-2 h5 text-light">
+						<div class="header-drop_menu-wrapper">
+							<i class="fa fa-location-arrow" aria-hidden="true"></i>
+							<div class="header-drop_menu h6" style="right: -100px;">
+								<?php foreach ($GLOBALS['company_contacts']->company_address as $key => $value): ?>
+									<a href="/contacts/" class="header-drop_menu-item d-block p-2 m-0">
+										<?php echo $value; ?>
+									</a>
+								<?php endforeach ?>
+								<div class="text-info p-3">
+									<i class="fa fa-clock-o" aria-hidden="true"></i>
+									<?php echo $GLOBALS['company_contacts']->work_time; ?>
+								</div>
+							</div>
+						</div>				
+					</div>
+
+					<?php foreach ($GLOBALS['company_contacts']->social_networks as $key => $value): ?>
+						<?php if ($value): ?>
+							<a href="<?php echo $value; ?>" class="text-light h5 col-1 d-lg-block d-md-none d-sm-none d-none">
+								<i class="fa fa-<?php echo $key;?>" aria-hidden="true"></i>
+							</a>
+						<?php endif ?>
+					<?php endforeach ?>
+
+					<div class="col-lg-1 col-md-1 col-sm-2 col-2 h1 text-light d-lg-none d-md-block d-sm-block d-block">
+						<div class="header-drop_menu-wrapper">
+							<i class="fa fa-bars" aria-hidden="true"></i>
+							<div class="header-drop_menu"  style="right: -50px;">
+								<div class="header-drop_menu-social_networks text-center p-3">
+									<?php foreach ($GLOBALS['company_contacts']->social_networks as $key => $value): ?>
+										<?php if ($value): ?>
+											<a href="<?php echo $value; ?>" class="header-social_networks-item h5 p-2">
+												<i class="fa fa-<?php echo $key;?>" aria-hidden="true"></i>
+											</a>
+										<?php endif ?>
+									<?php endforeach ?>
+								</div>
+
+								<div class="p2">
+									<?php foreach ($main_menu_arr as $key => $value): ?>
+										<a href="<?php echo $value->url; ?>" class="p-2 d-block h5 header-main_menu-item">
+											<?php echo $value->title; ?>
+										</a>
+									<?php endforeach ?>
+								</div>
+							</div>
+						</div>				
+					</div>
+
+				</div>
+				
+				<div class="header-main_menu-desktop d-lg-block d-md-none d-sm-none d-none text-center row border-top border-info">
+					<?php foreach ($main_menu_arr as $key => $value): ?>
+						<a href="<?php echo $value->url; ?>" class="text-light">
+							<?php echo $value->title; ?>
+						</a>
+					<?php endforeach ?>
+				</div>
+
+			</div>
 		</div>
+
+
+
+
+
+
+
+		
 		
 
 	</div>

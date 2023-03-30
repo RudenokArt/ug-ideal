@@ -165,7 +165,7 @@ $_SESSION['back_page_url'] = $_SERVER['REQUEST_URI'];
       <ul class="pagination p-0 m-0">
         <?php if ($modular_gallery_view->pagination['paged'] != 1): ?>
           <li class="page-item">
-            <a class="page-link" href="#" aria-label="Previous">
+            <a href="?<?php echo $_SERVER['QUERY_STRING'];?>&pageN=<?php echo ($modular_gallery_view->pagination['paged']-1);?>" class="page-link" aria-label="Previous">
               <span aria-hidden="true">
                 <i class="fa fa-chevron-left" aria-hidden="true"></i>
               </span>
@@ -191,14 +191,15 @@ $_SESSION['back_page_url'] = $_SERVER['REQUEST_URI'];
     <?php endfor ?>
     <?php if ($modular_gallery_view->pagination['paged'] != $modular_gallery_view->pagination['max_num_pages']): ?>
       <li class="page-item">
-        <a class="page-link" href="#" aria-label="Next">
-          <span aria-hidden="true">
-            <i class="fa fa-chevron-right" aria-hidden="true"></i>
-          </span>
-        </a>
-      </li>
-    <?php endif ?>
-  </ul>
+        <a
+        href="?<?php echo $_SERVER['QUERY_STRING'];?>&pageN=<?php echo ($modular_gallery_view->pagination['paged']+1);?>" aria-label="Next" class="page-link" >
+        <span aria-hidden="true">
+          <i class="fa fa-chevron-right" aria-hidden="true"></i>
+        </span>
+      </a>
+    </li>
+  <?php endif ?>
+</ul>
 </nav>
 </div>
 </div>
@@ -434,40 +435,40 @@ class Modular_gallery_view {
 
   function getCatlogImage ($image_id) {
     global $wpdb;
-   $img = $wpdb->get_results(
-    'SELECT `image_url` FROM `wp_bwg_image`
-    WHERE `id`=' . $image_id
-  );
-   if ($img) {
-    return $img[0]->image_url;
+    $img = $wpdb->get_results(
+      'SELECT `image_url` FROM `wp_bwg_image`
+      WHERE `id`=' . $image_id
+    );
+    if ($img) {
+      return $img[0]->image_url;
+    }
+    return false;
   }
-  return false;
-}
 
-function getPostsArr () {
-  $arr = [
-   'paged' => $this->pagination['paged'],
-   'post_type' => 'post',
-   'cat' => $this->modular_category->cat_ID,
-   'post_status' => 'publish',
-   'order' => 'DESC',
-   'orderby' => 'title',
-   'posts_per_page' => 10,
- ];
- if (isset($_GET['category']) and isset($_GET['subcategory'])) {
-   $arr['cat'] = $_GET['subcategory'];
- } elseif (isset($_GET['category'])) {
-   $arr['cat'] = $_GET['category'];
- }
- if (isset($_GET['search'])) {
-   $arr['s'] = $_GET['search'];
- }
- $this->post_src = new WP_Query($arr);
+  function getPostsArr () {
+    $arr = [
+     'paged' => $this->pagination['paged'],
+     'post_type' => 'post',
+     'cat' => $this->modular_category->cat_ID,
+     'post_status' => 'publish',
+     'order' => 'DESC',
+     'orderby' => 'title',
+     'posts_per_page' => 10,
+   ];
+   if (isset($_GET['category']) and isset($_GET['subcategory'])) {
+     $arr['cat'] = $_GET['subcategory'];
+   } elseif (isset($_GET['category'])) {
+     $arr['cat'] = $_GET['category'];
+   }
+   if (isset($_GET['search'])) {
+     $arr['s'] = $_GET['search'];
+   }
+   $this->post_src = new WP_Query($arr);
    // return get_posts($arr);
- return $this->post_src->posts;
-}
+   return $this->post_src->posts;
+ }
 
-function getCurrentSubcategory () {
+ function getCurrentSubcategory () {
   if (isset($_GET['subcategory'])) {
     foreach ($this->current_category['subcategories'] as $key => $value) {
       if ($value['id'] == $_GET['subcategory']) {

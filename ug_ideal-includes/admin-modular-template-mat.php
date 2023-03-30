@@ -11,6 +11,15 @@ if (isset($_POST['add_template_mat']) and $_POST['add_template_mat'] == "Y") {
 	]);
 }
 
+$edit_template_mat = false;
+if (isset($_POST['edit_template_mat'])) {
+	$edit_template_mat = wp_update_post([
+		'ID' => $_POST['edit_template_mat'],
+		'post_title' => $_POST['post_title'],
+		'post_content' => $_POST['post_content'],
+	]);
+}
+
 $delete_template_mat = false;
 if (isset($_POST['delete_template_mat'])) {
 	$delete_template_mat = wp_delete_post($_POST['delete_template_mat'], true);
@@ -30,6 +39,12 @@ include_once __DIR__.'/admin-header.php';
 	<div class="h1">
 		Материалы для шаблонов модульных картин
 	</div>
+
+	<?php if ($edit_template_mat): ?>
+		<div class="alert alert-success text-center">
+			Изменения внесены в базу данных
+		</div>
+	<?php endif ?>
 
 	<?php if ($add_template_mat): ?>
 		<div class="alert alert-success text-center">
@@ -58,17 +73,43 @@ include_once __DIR__.'/admin-header.php';
 				<span class="dashicons dashicons-yes"></span>OK
 			</button>
 		</form>
-		<div class="col-lg-4 col-md-6 col-sm-12 col-12">
+		<div class="col-lg-6 col-md-8 col-sm-12 col-12">
 			<table class="table">
 				<tr>
-					<th>Материал</th>
-					<th>Наценка (%)</th>
+					<th>
+						<div class="row">
+							<div class="col">
+								Материал
+							</div>
+							<div class="col">
+								Наценка (%)
+							</div>
+						</div>
+					</th>
+					<th></th>
+					<th></th>
 				</tr>
 				<?php foreach ($template_mat_arr as $key => $value): ?>
 					<tr>
-						<td><?php echo $value->post_title ?></td>
-						<td><?php echo $value->post_content ?></td>
 						<td>
+							<form action="" method="post" class="row">
+								<div class="col-6">
+									<input type="text" class="forom-control" name="post_title"
+							value="<?php echo $value->post_title ?>" required="required">
+								</div>
+								<div class="col-4">
+									<input type="text" class="forom-control w-50" name="post_content"
+							value="<?php echo $value->post_content ?>" required="required">
+								</div>
+								<div class="col-2">
+									<button name="edit_template_mat" value="<?php echo $value->ID ?>"
+										class="btn btn-outline-success" title="Сохранить">
+										<span class="dashicons dashicons-yes"></span>
+									</button>
+								</div>
+							</form>
+						</td>
+						<td class="text-center">
 							<form action="" method="post">
 								<button name="delete_template_mat" value="<?php echo $value->ID ?>"
 									class="btn btn-outline-danger" title="Удалить">
