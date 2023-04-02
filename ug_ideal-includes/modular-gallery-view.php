@@ -301,11 +301,6 @@ $_SESSION['back_page_url'] = $_SERVER['REQUEST_URI'];
   </script>  
 <?php endif ?>
 
-<pre>
-  <?php print_r(Modular_gallery_view::$template_size_arr) ?>
-  <?php print_r($modular_gallery_view->images_arr) ?>
-</pre>
-
 <?php 
 
 /**

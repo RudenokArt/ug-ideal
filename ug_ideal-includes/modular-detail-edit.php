@@ -93,10 +93,6 @@ $detail_edit = new DetailEdit($_GET['edit']);
 	});
 </script>
 
-<pre class="pt-5 mt-5">
-	<?php print_r($detail_edit->post->post_content); ?>
-</pre>
-
 <?php 
 
 /**
