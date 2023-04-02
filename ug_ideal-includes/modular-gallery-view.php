@@ -348,7 +348,7 @@ class Modular_gallery_view {
   public static function getTemplatePrice ($template_img) {
 
     $template_post = get_posts([
-      'post_name' => $template_img,
+      'name' => $template_img,
       'category_name' => 'modular_template_price',
       'numberposts' => 0,
     ]);
