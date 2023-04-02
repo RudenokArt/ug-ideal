@@ -4,33 +4,30 @@
 Template Name: ug_ideal-contacts
 */
 
-get_header();
-
 $maps_yandex_arr = [
-
-'<script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A7be626d92e2f9127908ffea6fce4c0542971935a75891150aab86a18bb97ecdc&amp;width=500&amp;height=300&amp;lang=ru_RU&amp;scroll=true"></script>',
 
 '<script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A15f410260bf8262eb46fff9ca90e2456efd907b95b4ff1be34622b13000b4079&amp;width=500&amp;height=300&amp;lang=ru_RU&amp;scroll=true"></script>',
 
 '<script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Acea8a7621a8f6017fe1b26f31363de6ef4622055efac2777f1972b59fcbf2538&amp;width=500&amp;height=300&amp;lang=ru_RU&amp;scroll=true"></script>',
+
+
+'<script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A7be626d92e2f9127908ffea6fce4c0542971935a75891150aab86a18bb97ecdc&amp;width=500&amp;height=300&amp;lang=ru_RU&amp;scroll=true"></script>',
 ];
 
 ?>
-
+<?php include_once 'ug_ideal-includes/header.php'; ?>
 <div class="container pt-3 pb-3 mt-5">
 	<div class="row">
-		<div class="col-lg-9 col-md-8 col-sm-12 col-12">
+			<?php foreach ($GLOBALS['company_contacts']->company_address as $key => $value): ?>
+				<div class="pb-5 col-lg-6 col-md-12 col-sm-12 col-12">
 			<div class="h4">
 				<?php echo $GLOBALS['company_contacts']->company_name; ?>
 			</div>
-			<?php foreach ($GLOBALS['company_contacts']->company_address as $key => $value): ?>
-				<div class="pb-5">
 					<div class="h5"><?php echo $value; ?></div>
 					<?php echo $maps_yandex_arr[$key]; ?>
 				</div>
 			<?php endforeach ?>
-		</div>
-		<div class="col-lg-3 col-md-4 col-sm-12 col-12">
+		<div class="col-lg-6 col-md-12 col-sm-12 col-12">
 			<?php foreach ($GLOBALS['company_contacts']->company_phones as $key => $value): ?>
 				<a href="tel:<?php echo $value; ?>" class="d-block pt-1 footer-phone">
 					<svg  width="16" height="16" fill="currentColor" class="bi bi-telephone" viewBox="0 0 16 16">
@@ -59,3 +56,4 @@ $maps_yandex_arr = [
 		</div>
 	</div>
 </div>
+<?php get_footer(); ?>
