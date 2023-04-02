@@ -34,7 +34,6 @@ $template_size_arr = get_posts([
 include_once __DIR__.'/admin-header.php';
 ?>
 
-<pre><?php print_r($_POST); ?></pre>
 
 <div class="container pt-5">
 	<div class="h1">

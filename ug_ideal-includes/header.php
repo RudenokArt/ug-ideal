@@ -90,7 +90,11 @@ $main_menu_arr = wp_get_nav_menu_items($main_menu->term_id);
 
 					<div class="col-lg-1 col-md-1 col-sm-2 col-2 h5 text-light">
 						<div class="header-drop_menu-wrapper">
-							<i class="fa fa-location-arrow" aria-hidden="true"></i>
+							<div style="transform: scale(1.2);">
+								<svg width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+								<path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+							</svg>
+							</div>
 							<div class="header-drop_menu h6" style="right: -100px;">
 								<?php foreach ($GLOBALS['company_contacts']->company_address as $key => $value): ?>
 									<a href="/contacts/" class="header-drop_menu-item d-block p-2 m-0">

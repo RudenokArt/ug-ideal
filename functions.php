@@ -123,7 +123,15 @@ require $theme_dir . '/inc/structure/sidebars.php';
 
 
 
+function remove_plugin_updates($value) {
+  return null;
+}
+add_filter('site_transient_update_plugins', 'remove_plugin_updates');
 
+function remove_theme_updates($value) {
+  return null;
+}
+add_filter('site_transient_update_themes', 'remove_theme_updates');
 
 
 add_action( 'admin_menu', 'true_top_menu_page', 25 );

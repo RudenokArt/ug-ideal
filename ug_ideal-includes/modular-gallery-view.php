@@ -123,7 +123,7 @@ $_SESSION['back_page_url'] = $_SERVER['REQUEST_URI'];
       <a href="?id=<?php echo $value['post_name'];?>" class="col-4 smart_link" title="Редактировать в конструкторе">
         <?php echo $value['post_title'];?>
       </a> 
-      <div class="col-7">
+      <div class="col-4">
         <?php if (isset($value['post_category']['parent_id']) and !empty($value['post_category']['parent_id'])): ?>
         <a href="?category=<?php echo $value['post_category']['parent_id'];?>" class="col smart_link">
           <?php echo $value['post_category']['parent'];?>
@@ -137,20 +137,27 @@ $_SESSION['back_page_url'] = $_SERVER['REQUEST_URI'];
           <?php echo $value['post_category']['name'];?>
         </a>
       <?php endif ?>
-    </div>   
-  </div>
-  <div class="favorite-item-icon" id="<?php echo $value['fav_link'];?>">
-    <i class="fa fa-star" aria-hidden="true"></i>
-    <i class="fa fa-star-o" aria-hidden="true"></i>
-  </div>
-  <?php if (!isset($GLOBALS['admin_current_gallery'])): ?>
-    <?php if (current_user_can('manage_options')): ?>
-      <a href="?edit=<?php echo $value['post_id'];?>">
-        <i class="fa fa-wrench" aria-hidden="true"></i>
-      </a>
-    <?php endif ?>
-  <?php endif ?>    
-  <hr>
+    </div>  
+    <div class="col-4 h6 text-info">
+      <?php if (!(isset($GLOBALS['admin_current_gallery']) and $GLOBALS['admin_current_gallery'] == 'wallpaper')): ?>
+       <a href="?id=<?php echo $value['post_name'];?>" class="col-4 smart_link" title="подробнее">
+        <?php print_r(Modular_gallery_view::getTemplatePrice($value['template']['id'])); ?>
+      </a> 
+    <?php endif; ?>
+  </div> 
+</div>
+<div class="favorite-item-icon" id="<?php echo $value['fav_link'];?>">
+  <i class="fa fa-star" aria-hidden="true"></i>
+  <i class="fa fa-star-o" aria-hidden="true"></i>
+</div>
+<?php if (!isset($GLOBALS['admin_current_gallery'])): ?>
+  <?php if (current_user_can('manage_options')): ?>
+    <a href="?edit=<?php echo $value['post_id'];?>">
+      <i class="fa fa-wrench" aria-hidden="true"></i>
+    </a>
+  <?php endif ?>
+<?php endif ?>    
+<hr>
 </div>
 <?php endforeach ?>
 
@@ -294,6 +301,11 @@ $_SESSION['back_page_url'] = $_SERVER['REQUEST_URI'];
   </script>  
 <?php endif ?>
 
+<pre>
+  <?php print_r(Modular_gallery_view::$template_size_arr) ?>
+  <?php print_r($modular_gallery_view->images_arr) ?>
+</pre>
+
 <?php 
 
 /**
@@ -301,6 +313,7 @@ $_SESSION['back_page_url'] = $_SERVER['REQUEST_URI'];
  */
 class Modular_gallery_view {
 
+  public static $template_size_arr;
   function __construct() {
     $this->pagination = ['paged' => 1];
     if (isset($_GET['pageN'])) {
@@ -317,6 +330,10 @@ class Modular_gallery_view {
       $this->prefix = '';
       $this->gallery_name = 'Модульные картины';
       $this->gallery_url = '/modular/';
+      self::$template_size_arr = get_posts([
+        'numberposts' => 0,
+        'category_name' => 'modular_template_size',
+      ]);
     }
 
     $this->categories_list = get_categories([
@@ -331,6 +348,24 @@ class Modular_gallery_view {
     $this->posts_arr = $this->getPostsArr();
     $this->images_arr = $this->getImagesArr();
     $this->pagination['max_num_pages'] = $this->post_src->max_num_pages;
+  }
+
+  public static function getTemplatePrice ($template_img) {
+
+    $template_post = get_posts([
+      'post_name' => $template_img,
+      'category_name' => 'modular_template_price',
+      'numberposts' => 0,
+    ]);
+    $post_content = json_decode($template_post[0]->post_content, true);
+    foreach (self::$template_size_arr as $key => $value) {
+      $arr[] = $post_content[$value->ID];
+    }
+    if (min($arr) > 0) {
+      return 'от ' . min($arr) . ' руб.';
+    } else {
+      return false;
+    }
   }
 
   function itemStyle ($json) {
@@ -409,66 +444,67 @@ class Modular_gallery_view {
   function getPostContent ($post_content) {
     $content = json_decode($post_content, true);
     if (isset($content['template_id'])) {
-      $arr['template']['image_url'] = $this->getCatlogImage($content['template_id']);
-    }
-    if (isset($content['interior_id'])) {
-      $arr['interior']['image_url'] = $this->getCatlogImage($content['interior_id']);
-    }
-    return $arr;
-  }
-
-  function getPostCategoryMeta ($cat_ID) {
-    $meta = get_term_meta($cat_ID);
-    $arr = [];
-    if ($meta) {
-      if (isset($meta['template']) and !empty($meta['template'])) {
-        $arr['template']['id'] = $meta['template'][0];
-        $arr['template']['image_url'] = $this->getCatlogImage($meta['template'][0]);
-      }
-      if (isset($meta['interior']) and !empty($meta['interior'])) {
-        $arr['interior']['id'] = $meta['interior'][0];
-        $arr['interior']['image_url'] = $this->getCatlogImage($meta['interior'][0]);
-      }
-    }
-    return $arr;
-  }
-
-  function getCatlogImage ($image_id) {
-    global $wpdb;
-    $img = $wpdb->get_results(
-      'SELECT `image_url` FROM `wp_bwg_image`
-      WHERE `id`=' . $image_id
-    );
-    if ($img) {
-      return $img[0]->image_url;
-    }
-    return false;
-  }
-
-  function getPostsArr () {
-    $arr = [
-     'paged' => $this->pagination['paged'],
-     'post_type' => 'post',
-     'cat' => $this->modular_category->cat_ID,
-     'post_status' => 'publish',
-     'order' => 'DESC',
-     'orderby' => 'title',
-     'posts_per_page' => 10,
-   ];
-   if (isset($_GET['category']) and isset($_GET['subcategory'])) {
-     $arr['cat'] = $_GET['subcategory'];
-   } elseif (isset($_GET['category'])) {
-     $arr['cat'] = $_GET['category'];
+     $arr['template']['id'] = $content['template_id'];
+     $arr['template']['image_url'] = $this->getCatlogImage($content['template_id']);
    }
-   if (isset($_GET['search'])) {
-     $arr['s'] = $_GET['search'];
-   }
-   $this->post_src = new WP_Query($arr);
-   // return get_posts($arr);
-   return $this->post_src->posts;
+   if (isset($content['interior_id'])) {
+    $arr['interior']['image_url'] = $this->getCatlogImage($content['interior_id']);
+  }
+  return $arr;
+}
+
+function getPostCategoryMeta ($cat_ID) {
+  $meta = get_term_meta($cat_ID);
+  $arr = [];
+  if ($meta) {
+    if (isset($meta['template']) and !empty($meta['template'])) {
+      $arr['template']['id'] = $meta['template'][0];
+      $arr['template']['image_url'] = $this->getCatlogImage($meta['template'][0]);
+    }
+    if (isset($meta['interior']) and !empty($meta['interior'])) {
+      $arr['interior']['id'] = $meta['interior'][0];
+      $arr['interior']['image_url'] = $this->getCatlogImage($meta['interior'][0]);
+    }
+  }
+  return $arr;
+}
+
+function getCatlogImage ($image_id) {
+  global $wpdb;
+  $img = $wpdb->get_results(
+    'SELECT `image_url` FROM `wp_bwg_image`
+    WHERE `id`=' . $image_id
+  );
+  if ($img) {
+    return $img[0]->image_url;
+  }
+  return false;
+}
+
+function getPostsArr () {
+  $arr = [
+   'paged' => $this->pagination['paged'],
+   'post_type' => 'post',
+   'cat' => $this->modular_category->cat_ID,
+   'post_status' => 'publish',
+   'order' => 'DESC',
+   'orderby' => 'title',
+   'posts_per_page' => 10,
+ ];
+ if (isset($_GET['category']) and isset($_GET['subcategory'])) {
+   $arr['cat'] = $_GET['subcategory'];
+ } elseif (isset($_GET['category'])) {
+   $arr['cat'] = $_GET['category'];
  }
+ if (isset($_GET['search'])) {
+   $arr['s'] = $_GET['search'];
+ }
+ $this->post_src = new WP_Query($arr);
+   // return get_posts($arr);
+ return $this->post_src->posts;
+}
 
- function getCurrentSubcategory () {
+function getCurrentSubcategory () {
   if (isset($_GET['subcategory'])) {
     foreach ($this->current_category['subcategories'] as $key => $value) {
       if ($value['id'] == $_GET['subcategory']) {
