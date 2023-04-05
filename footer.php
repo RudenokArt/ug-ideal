@@ -1,7 +1,7 @@
 
 
-<div style="background: #3cb2e4;">
-	<div class="container pt-3 text-light pb-3 mt-5">
+<div class="theme_color">
+	<div class="container pt-3 text_color pb-3 mt-5">
 		<div class="row">
 			<div class="col-lg-4 col-md-12 col-sm-12 col-12">
 				<div class="h4">
@@ -15,19 +15,19 @@
 			</div>
 			<div class="col-lg-4 col-md-12 col-sm-12 col-12">
 				<?php foreach ($GLOBALS['company_contacts']->company_phones as $key => $value): ?>
-					<a href="tel:<?php echo $value; ?>" class="d-block text-light pt-1 footer-phone">
+					<a href="tel:<?php echo $value; ?>" class="d-block text_color pt-1 footer-phone">
 						<?php echo $value; ?>
 					</a>
 				<?php endforeach ?>
 				<?php foreach ($GLOBALS['company_contacts']->company_email as $key => $value): ?>
-					<a href="mailto:<?php echo $value; ?>" class="d-block text-light pt-1 footer-email">
+					<a href="mailto:<?php echo $value; ?>" class="d-block text_color pt-1 footer-email">
 						<?php echo $value; ?>
 					</a>
 				<?php endforeach ?>
 				<div class="pt-2">
 					<?php foreach ($GLOBALS['company_contacts']->social_networks as $key => $value): ?>
 						<?php if ($value): ?>
-							<a href="<?php echo $value; ?>" class="header-social_networks-item h5 p-2 text-light">
+							<a href="<?php echo $value; ?>" class="header-social_networks-item h5 p-2 text_color">
 								<i class="fa fa-<?php echo $key;?>" aria-hidden="true"></i>
 							</a>
 						<?php endif ?>

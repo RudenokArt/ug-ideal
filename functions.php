@@ -236,6 +236,15 @@ function true_top_menu_page(){
     'admin_company_contacts' // функция, которая выводит содержимое страницы
   );
 
+  add_submenu_page(
+    'ug_ideal_admin',
+    'Тема интерфейса', // тайтл страницы
+    'Тема интерфейса', // текст ссылки в меню
+    'manage_options', // права пользователя, необходимые для доступа к странице
+    'admin-interface-theme', // ярлык страницы
+    'admin_interface_theme' // функция, которая выводит содержимое страницы
+  );
+
 
 } 
 
@@ -283,3 +292,6 @@ function admin_company_contacts () {
   include_once 'ug_ideal-includes/admin-company-contacts.php';
 }
 
+function admin_interface_theme () {
+  include_once 'ug_ideal-includes/admin-interface-theme.php';
+}

@@ -482,9 +482,21 @@ function getPostsArr () {
    'post_type' => 'post',
    'cat' => $this->modular_category->cat_ID,
    'post_status' => 'publish',
-   'order' => 'DESC',
-   'orderby' => 'title',
    'posts_per_page' => 10,
+   // 'order' => 'DESC',
+   'orderby' => 'meta_value_num',
+   'meta_query' => array(
+    'relation' => 'OR',
+    array(
+      'key' => 'sorting',
+      'compare' => 'EXISTS'
+    ),
+    array(
+      'key' => 'sorting',
+      'compare' => 'NOT EXISTS'
+    ),
+  )
+
  ];
  if (isset($_GET['category']) and isset($_GET['subcategory'])) {
    $arr['cat'] = $_GET['subcategory'];

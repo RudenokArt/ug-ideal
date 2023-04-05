@@ -37,6 +37,9 @@
       <a href="?page=admin-company-contacts" class="btn btn-outline-secondary w-100 text-start mb-1">
         Компания, контакты
       </a>
+       <a href="?page=admin-interface-theme" class="btn btn-outline-secondary w-100 text-start mb-1">
+        Тема интерфейса (цвета)
+      </a>
     </div>
   </div>
   <div class="row">
@@ -58,3 +61,5 @@
     </div>
   </div>
 </div>
+
+

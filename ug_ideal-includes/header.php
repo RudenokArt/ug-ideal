@@ -35,14 +35,16 @@ $GLOBALS['company_contacts'] = new Company_data();
 
 $main_menu = wp_get_nav_menus(['name'=>'Основное меню'])[0];
 $main_menu_arr = wp_get_nav_menu_items($main_menu->term_id);
+include_once 'interface_theme.php';
 ?>
 
 <div class="p-5"></div>
-<div class="header pt-3 pb-1" style="background: #3cb2e4;">
+<div class="header pt-3 pb-1 theme_color">
+<!-- #3cb2e4 -->
 	<div class="container">
 
 		<div class="row">
-			<div class="col-lg-6 col-md-6 d-lg-block d-md-block d-sm-none d-none text-light">
+			<div class="col-lg-6 col-md-6 d-lg-block d-md-block d-sm-none d-none text_color">
 				<div><?php echo $GLOBALS['company_contacts']->company_name; ?></div>
 			</div>
 		</div>
@@ -58,7 +60,7 @@ $main_menu_arr = wp_get_nav_menu_items($main_menu->term_id);
 			<div class="col-lg-10 col-md-10 col-sm-10 col-9">
 				<div class="row align-items-center justify-content-center">
 
-					<div class="col-lg-1 col-md-1 col-sm-2 col-2 h5 text-light">
+					<div class="col-lg-1 col-md-1 col-sm-2 col-2 h5 text_color">
 						<div class="header-drop_menu-wrapper">
 							<i class="fa fa-envelope-o" aria-hidden="true"></i>
 							<div class="header-drop_menu" style="right: -200px;">
@@ -71,7 +73,7 @@ $main_menu_arr = wp_get_nav_menu_items($main_menu->term_id);
 						</div>				
 					</div>
 
-					<div class="col-lg-1 col-md-1 col-sm-2 col-2 h5 text-light">
+					<div class="col-lg-1 col-md-1 col-sm-2 col-2 h5 text_color">
 						<div class="header-drop_menu-wrapper">
 							<i class="fa fa-phone" aria-hidden="true"></i>
 							<div class="header-drop_menu" style="right: -150px;">
@@ -88,7 +90,7 @@ $main_menu_arr = wp_get_nav_menu_items($main_menu->term_id);
 						</div>				
 					</div>
 
-					<div class="col-lg-1 col-md-1 col-sm-2 col-2 h5 text-light">
+					<div class="col-lg-1 col-md-1 col-sm-2 col-2 h5 text_color">
 						<div class="header-drop_menu-wrapper">
 							<div style="transform: scale(1.2);">
 								<svg width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
@@ -111,13 +113,13 @@ $main_menu_arr = wp_get_nav_menu_items($main_menu->term_id);
 
 					<?php foreach ($GLOBALS['company_contacts']->social_networks as $key => $value): ?>
 						<?php if ($value): ?>
-							<a href="<?php echo $value; ?>" class="text-light h5 col-1 d-lg-block d-md-none d-sm-none d-none">
+							<a href="<?php echo $value; ?>" class="text_color h5 col-1 d-lg-block d-md-none d-sm-none d-none">
 								<i class="fa fa-<?php echo $key;?>" aria-hidden="true"></i>
 							</a>
 						<?php endif ?>
 					<?php endforeach ?>
 
-					<div class="col-lg-1 col-md-1 col-sm-2 col-2 h1 text-light d-lg-none d-md-block d-sm-block d-block">
+					<div class="col-lg-1 col-md-1 col-sm-2 col-2 h1 text_color d-lg-none d-md-block d-sm-block d-block">
 						<div class="header-drop_menu-wrapper">
 							<i class="fa fa-bars" aria-hidden="true"></i>
 							<div class="header-drop_menu"  style="right: -50px;">
@@ -146,7 +148,7 @@ $main_menu_arr = wp_get_nav_menu_items($main_menu->term_id);
 				
 				<div class="header-main_menu-desktop d-lg-block d-md-none d-sm-none d-none text-center row border-top border-info">
 					<?php foreach ($main_menu_arr as $key => $value): ?>
-						<a href="<?php echo $value->url; ?>" class="text-light">
+						<a href="<?php echo $value->url; ?>" class="text_color">
 							<?php echo $value->title; ?>
 						</a>
 					<?php endforeach ?>

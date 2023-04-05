@@ -12,6 +12,10 @@ $category_edit_alert = [
 	'color' => 'danger'
 ];
 
+if (isset($_POST['edit_category_image_sorting']) and !empty($_POST['edit_category_image_sorting'])) {
+  Admin_modular_category_edit::setImageSorting();
+}
+
 $category_edit = new Admin_modular_category_edit($_GET['category_edit'], $prefix);
 
 if (isset($_POST['edit_category_image_delete'])) {
@@ -75,7 +79,7 @@ $category_edit->getCurrentTemplate();
 
 	<div class="row">
 
-		<form action="" method="post" class="col-lg-4 col-md-6 col-sm-12 col-12 h5">
+		<form action="" method="post" class="col-lg-4 col-md-6 col-sm-12 col-12 h6">
 			Название категории:
       <div class="row">
        <div class="col-10">
@@ -90,7 +94,7 @@ $category_edit->getCurrentTemplate();
   </form>
 
   <?php if (!isset($GLOBALS['admin_current_gallery'])): ?>
-    <form action="" method="post" class="col-lg-4 col-md-6 col-sm-12 col-12 h5">
+    <form action="" method="post" class="col-lg-4 col-md-6 col-sm-12 col-12 h6">
      <div class="row pb-1">
       <div class="col-8">
         Шаблон для категории по умолчанию:
@@ -122,7 +126,7 @@ $category_edit->getCurrentTemplate();
 <?php endif ?>
 
 
-<form action="" method="post" class="col-lg-4 col-md-6 col-sm-12 col-12 h5">
+<form action="" method="post" class="col-lg-4 col-md-6 col-sm-12 col-12 h6">
   <div class="row pb-1">
     <div class="col-8">
       Интерьер для категории по умолчанию:
@@ -169,36 +173,67 @@ $category_edit->getCurrentTemplate();
   <?php foreach ($category_edit->images_list as $key => $value): ?>
     <div class="col-lg-3 col-md-6 col-sm-12 col-12">
       <div class="row border m-1">
-        <div class="col-7 p-1">
-          <img src="<?php echo $photo_galery_url.$value->thumb_url;?>"
-          alt="<?php echo $value->slug;?>" height="75">
-        </div>
-        <div class="col-5 p-2">
-          <form action="" method="post">
-            <?php echo $value->slug; ?>
-            <br>
-            <button name="edit_category_image_delete" value="<?php echo $value->id; ?>" 
-              title="Удалить" class="btn btn-outline-danger">
-              <span class="dashicons dashicons-trash"></span>
-            </button>
-          </form>
-        </div>
+        <div style="
+        background-image: url(<?php echo $photo_galery_url.$value->thumb_url;?>);
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        height: 75px;
+        width: 100px;
+        " class="col-7 p-1">
       </div>
+      <div class="col-5 p-2">
+        <form action="" method="post">
+          <?php echo $value->slug; ?>
+          <br>
+          <button name="edit_category_image_delete" value="<?php echo $value->post_id; ?>" 
+            title="Удалить" class="btn btn-sm btn-outline-danger">
+            <span class="dashicons dashicons-trash"></span>
+          </button>
+        </form>
+      </div>
+      <form action="" method="post" class="pt-1 pb-1 row">
+        <div class="col-12">
+          Сортировка:
+        </div>
+        <div class="col-6">
+          <input value="<?php echo Admin_modular_category_edit::getImageSorting($value->post_id);?>"
+          type="number" name="sorting" class="form-control" step="1" min="1">
+        </div>
+        <div class="col-6">
+          <button name="edit_category_image_sorting"  value="<?php echo $value->post_id;?>" class="btn btn-sm btn-outline-success">
+            <span class="dashicons dashicons-yes"></span>
+          </button>
+        </div>
+      </form>
     </div>
-  <?php endforeach ?>
+  </div>
+<?php endforeach ?>
+</div>
 </div>
 
-</div>
+<?php
 
-<?php 
 /**
  * 
  */
 class Admin_modular_category_edit {
-	
-	function __construct($category_id, $prefix) {
 
-		global $wpdb;
+  public static function setImageSorting () {
+    update_post_meta($_POST['edit_category_image_sorting'], 'sorting', $_POST['sorting'] );
+  }
+
+  public static function getImageSorting ($post_id) {
+    $sorting = get_post_meta($post_id, 'sorting');
+    if ($sorting) {
+      return $sorting[0];
+    }
+    return '';
+  }
+
+  function __construct($category_id, $prefix) {
+
+    global $wpdb;
     $this->prefix = $prefix;
     $this->category_id = $category_id;
 
@@ -235,11 +270,11 @@ class Admin_modular_category_edit {
     }
   }
 
-  function imageDeleteFromCategory ($img_id) {
-    $post_id = (new WP_Query([
-      'name' => $this->prefix . $img_id,
-      'post_type' => 'post',
-    ]))->posts[0]->ID;
+  function imageDeleteFromCategory ($post_id) {
+    // $post_id = (new WP_Query([
+    //   'name' => $this->prefix . $img_id,
+    //   'post_type' => 'post',
+    // ]))->posts[0]->ID;
     $image_delete = wp_delete_post($post_id);
     if ($image_delete) {
       return true;
@@ -249,13 +284,41 @@ class Admin_modular_category_edit {
 
   function getImagesList () {
     global $wpdb;
+    // $arr1 = get_posts([
+    //   'post_type' => 'post',
+    //   'post_status' => 'publish',
+    //   'category' => $this->category_id,
+    //   'numberposts' => -1,
+    //   'meta_key' => 'sorting',
+    //   'orderby' => 'meta_value',
+    // ]);
+    // if (sizeof($arr1)) {
+    //   foreach ($arr1 as $key => $value) {
+    //     $post__not_in[] = $value->ID;
+    //   }
+    // } else {
+    //   $post__not_in = [];
+    // }
     $arr = get_posts([
       'post_type' => 'post',
       'post_status' => 'publish',
       'category' => $this->category_id,
       'numberposts' => -1,
-      'orderby' => 'title',
+      'orderby' => 'meta_value_num',
+      'meta_query' => array(
+        'relation' => 'OR',
+        array(
+          'key' => 'sorting',
+          'compare' => 'EXISTS'
+        ),
+        array(
+          'key' => 'sorting',
+          'compare' => 'NOT EXISTS'
+        ),
+      )
     ]);
+    // $arr = array_merge($arr1, $arr2);
+    // $arr = array_unique($arr);
     $this->images_list = [];
     foreach ($arr as $key => $value) {
       if ($this->prefix != '') {
@@ -274,6 +337,8 @@ class Admin_modular_category_edit {
         $this->images_list[$key]->id = $value->post_name;
         $this->images_list[$key]->slug = $value->post_title;
       }
+      $this->images_list[$key]->post_id = $value->ID;
+      // self::getImageSorting($value->id);
     }
   }
 
