@@ -9,29 +9,53 @@
 		</div>
 	</div>
 	<form action="" method="post" class="row justify-content-center">
-		<div class="col-lg-4 col-md-6 col-sm-12 col-12 pb-5 border">
-			<div class="pt-5">
-				Цвет фона:
-				<input name="theme_color" value="<?php if (isset($theme_manager->theme_post_content->theme_color)): ?>
+		<div class="col-lg-8 col-md-10 col-sm-12 col-12 pb-5 border">
+
+			<div class="row">
+
+				<div class="pt-5 col-lg-6 col-md-6 col-sm-12 col-12">
+					Фон темы (header&footer):
+					<input name="theme_color" value="<?php if (isset($theme_manager->theme_post_content->theme_color)): ?>
 					<?php echo $theme_manager->theme_post_content->theme_color; ?>
 				<?php else: ?>
 					#0FFF1080
-				<?php endif ?>" data-jscolor="{}" class="form-control">
-			</div>
-			<div class="pt-5">
-				Цвет текста:
-				<input name="text_color" value="<?php if (isset($theme_manager->theme_post_content->text_color)): ?>
+					<?php endif ?>" data-jscolor="{}" class="form-control">
+				</div>
+
+				<div class="pt-5 col-lg-6 col-md-6 col-sm-12 col-12">
+					Текст темы (header&footer):
+					<input name="text_color" value="<?php if (isset($theme_manager->theme_post_content->text_color)): ?>
 					<?php echo $theme_manager->theme_post_content->text_color; ?>
 				<?php else: ?>
 					#3399FF80
-				<?php endif ?>" data-jscolor="{}" class="form-control">
+					<?php endif ?>" data-jscolor="{}" class="form-control">
+				</div>
+
+				<div class="pt-5 col-lg-6 col-md-6 col-sm-12 col-12">
+					Эффект наведения:
+					<input name="hover_color" value="<?php if (isset($theme_manager->theme_post_content->hover_color)): ?>
+					<?php echo $theme_manager->theme_post_content->hover_color; ?>
+				<?php else: ?>
+					#3399FF80
+					<?php endif ?>" data-jscolor="{}" class="form-control">
+				</div>
+
+				<div class="pt-5 col-lg-6 col-md-6 col-sm-12 col-12">
+					Текст контента:
+					<input name="content_color" value="<?php if (isset($theme_manager->theme_post_content->content_color)): ?>
+					<?php echo $theme_manager->theme_post_content->content_color; ?>
+				<?php else: ?>
+					#3399FF80
+					<?php endif ?>" data-jscolor="{}" class="form-control">
+				</div>
+
+				<div class="pt-5 col-lg-6 col-md-6 col-sm-12 col-12">
+					<button name="theme_manager" value="Y" class="btn btn-outline-success w-100">
+						<span class="dashicons dashicons-yes"></span>
+						Сохранить
+					</button>
+				</div>
 			</div>
-			<div class="pt-5">
-				<button name="theme_manager" value="Y" class="btn btn-outline-success w-100">
-					<span class="dashicons dashicons-yes"></span>
-					Сохранить
-				</button>
-			</div>		
 		</div>
 	</form>
 </div>
@@ -65,6 +89,8 @@ class Theme_manager {
 				'post_content' => json_encode([
 					'theme_color' => $_POST['theme_color'],
 					'text_color' => $_POST['text_color'],
+					'hover_color' => $_POST['hover_color'],
+					'content_color' => $_POST['content_color']
 				]),
 			]);
 			$this->getThemePost();

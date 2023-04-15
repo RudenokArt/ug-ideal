@@ -14,19 +14,19 @@ $_SESSION['back_page_url'] = $_SERVER['REQUEST_URI'];
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <a href="<?php echo $modular_gallery_view->gallery_url;?>">
+            <a href="<?php echo $modular_gallery_view->gallery_url;?>" class="content_color text_hover_color">
               <?php echo $modular_gallery_view->gallery_name; ?>
             </a>
           </li>
           <?php if ($modular_gallery_view->current_category): ?>            
             <li class="breadcrumb-item">
-              <a href="?category=<?php echo $modular_gallery_view->current_category['id'];?>">
+              <a href="?category=<?php echo $modular_gallery_view->current_category['id'];?>" class="content_color text_hover_color">
                 <?php echo $modular_gallery_view->current_category['name']; ?>
               </a>
             </li>
           <?php endif ?>
           <?php if ($modular_gallery_view->current_subcategory): ?>
-            <li class="breadcrumb-item active" aria-current="page">
+            <li class="breadcrumb-item active content_color text_hover_color" aria-current="page" >
               <?php echo $modular_gallery_view->current_subcategory['name']; ?>
             </li>
           <?php endif ?>
@@ -100,8 +100,11 @@ $_SESSION['back_page_url'] = $_SERVER['REQUEST_URI'];
 
             </a>
           <?php else: ?>
+            <?php $image_expand = $modular_gallery_view->imageExpand($value['post_content']); ?>
             <a href="?id=<?php echo $value['post_name'];?>" class="gallery-item-image_wrapper pt-5">
-             <div class="gallery-item-image_inner">
+             <div <?php if ($image_expand): ?>
+               style="width:80%; left:10%; top: -5%"
+             <?php endif ?> class="gallery-item-image_inner"> 
               <img src="<?php echo $photo_galery_url.$value['catalog_image_url'];?>"
               style="<?php echo $gallery_item_style;?>"
               class="gallery-item-image" alt="">
@@ -113,34 +116,37 @@ $_SESSION['back_page_url'] = $_SERVER['REQUEST_URI'];
           <?php if (isset($value['interior']['image_url']) and !empty($value['interior']['image_url'])): ?>
           <img src="<?php echo $photo_galery_url.$value['interior']['image_url'];?>"
           alt="<?php echo $value['post_title'] ?>" class="w-100">
+        <?php else: ?>
+          <img src="<?php echo $theme_url;?>/ug_ideal-assets/img/default_interior.png" alt="">
         <?php endif ?>
       </a>
     <?php endif ?>
 
 
 
-    <div class="row h5 pt-3">
-      <a href="?id=<?php echo $value['post_name'];?>" class="col-4 smart_link" title="Редактировать в конструкторе">
+    <div class="row pt-3">
+      <a href="?id=<?php echo $value['post_name'];?>" 
+        class="col-4 smart_link content_color text_hover_color" title="Редактировать в конструкторе">
         <?php echo $value['post_title'];?>
       </a> 
       <div class="col-4">
         <?php if (isset($value['post_category']['parent_id']) and !empty($value['post_category']['parent_id'])): ?>
-        <a href="?category=<?php echo $value['post_category']['parent_id'];?>" class="col smart_link">
+        <a href="?category=<?php echo $value['post_category']['parent_id'];?>" class="col smart_link content_color text_hover_color">
           <?php echo $value['post_category']['parent'];?>
         </a>
         /
-        <a href="?category=<?php echo $value['post_category']['parent_id'];?>&subcategory=<?php echo $value['post_category']['id'];?>" class="smart_link">
+        <a href="?category=<?php echo $value['post_category']['parent_id'];?>&subcategory=<?php echo $value['post_category']['id'];?>" class="smart_link content_color text_hover_color">
           <?php echo $value['post_category']['name'];?>
         </a>
       <?php else: ?>
-        <a href="?category=<?php echo $value['post_category']['id'];?>" class="smart_link">
+        <a href="?category=<?php echo $value['post_category']['id'];?>" class="smart_link content_color text_hover_color">
           <?php echo $value['post_category']['name'];?>
         </a>
       <?php endif ?>
     </div>  
     <div class="col-4 h6 text-info">
       <?php if (!(isset($GLOBALS['admin_current_gallery']) and $GLOBALS['admin_current_gallery'] == 'wallpaper')): ?>
-       <a href="?id=<?php echo $value['post_name'];?>" class="col-4 smart_link" title="подробнее">
+       <a href="?id=<?php echo $value['post_name'];?>" class="col-4 smart_link content_color text_hover_color" title="подробнее">
         <?php print_r(Modular_gallery_view::getTemplatePrice($value['template']['id'])); ?>
       </a> 
     <?php endif; ?>
@@ -363,6 +369,13 @@ class Modular_gallery_view {
     }
   }
 
+  function imageExpand ($json) {
+    $arr = json_decode($json, true);
+    if ($arr['image_expand']) {
+      return true;
+    }
+  }
+
   function itemStyle ($json) {
     $style = '';
     if ($json) {
@@ -439,79 +452,79 @@ class Modular_gallery_view {
   function getPostContent ($post_content) {
     $content = json_decode($post_content, true);
     if (isset($content['template_id'])) {
-     $arr['template']['id'] = $content['template_id'];
-     $arr['template']['image_url'] = $this->getCatlogImage($content['template_id']);
-   }
-   if (isset($content['interior_id'])) {
-    $arr['interior']['image_url'] = $this->getCatlogImage($content['interior_id']);
-  }
-  return $arr;
-}
-
-function getPostCategoryMeta ($cat_ID) {
-  $meta = get_term_meta($cat_ID);
-  $arr = [];
-  if ($meta) {
-    if (isset($meta['template']) and !empty($meta['template'])) {
-      $arr['template']['id'] = $meta['template'][0];
-      $arr['template']['image_url'] = $this->getCatlogImage($meta['template'][0]);
+      $arr['template']['id'] = $content['template_id'];
+      $arr['template']['image_url'] = $this->getCatlogImage($content['template_id']);
     }
-    if (isset($meta['interior']) and !empty($meta['interior'])) {
-      $arr['interior']['id'] = $meta['interior'][0];
-      $arr['interior']['image_url'] = $this->getCatlogImage($meta['interior'][0]);
+    if (isset($content['interior_id'])) {
+      $arr['interior']['image_url'] = $this->getCatlogImage($content['interior_id']);
     }
+    return $arr;
   }
-  return $arr;
-}
 
-function getCatlogImage ($image_id) {
-  global $wpdb;
-  $img = $wpdb->get_results(
-    'SELECT `image_url` FROM `wp_bwg_image`
-    WHERE `id`=' . $image_id
-  );
-  if ($img) {
-    return $img[0]->image_url;
+  function getPostCategoryMeta ($cat_ID) {
+    $meta = get_term_meta($cat_ID);
+    $arr = [];
+    if ($meta) {
+      if (isset($meta['template']) and !empty($meta['template'])) {
+        $arr['template']['id'] = $meta['template'][0];
+        $arr['template']['image_url'] = $this->getCatlogImage($meta['template'][0]);
+      }
+      if (isset($meta['interior']) and !empty($meta['interior'])) {
+        $arr['interior']['id'] = $meta['interior'][0];
+        $arr['interior']['image_url'] = $this->getCatlogImage($meta['interior'][0]);
+      }
+    }
+    return $arr;
   }
-  return false;
-}
 
-function getPostsArr () {
-  $arr = [
-   'paged' => $this->pagination['paged'],
-   'post_type' => 'post',
-   'cat' => $this->modular_category->cat_ID,
-   'post_status' => 'publish',
-   'posts_per_page' => 10,
+  function getCatlogImage ($image_id) {
+    global $wpdb;
+    $img = $wpdb->get_results(
+      'SELECT `image_url` FROM `wp_bwg_image`
+      WHERE `id`=' . $image_id
+    );
+    if ($img) {
+      return $img[0]->image_url;
+    }
+    return false;
+  }
+
+  function getPostsArr () {
+    $arr = [
+     'paged' => $this->pagination['paged'],
+     'post_type' => 'post',
+     'cat' => $this->modular_category->cat_ID,
+     'post_status' => 'publish',
+     'posts_per_page' => 10,
    // 'order' => 'DESC',
-   'orderby' => 'meta_value_num',
-   'meta_query' => array(
-    'relation' => 'OR',
-    array(
-      'key' => 'sorting',
-      'compare' => 'EXISTS'
-    ),
-    array(
-      'key' => 'sorting',
-      'compare' => 'NOT EXISTS'
-    ),
-  )
+     'orderby' => 'meta_value_num',
+     'meta_query' => array(
+      'relation' => 'OR',
+      array(
+        'key' => 'sorting',
+        'compare' => 'EXISTS'
+      ),
+      array(
+        'key' => 'sorting',
+        'compare' => 'NOT EXISTS'
+      ),
+    )
 
- ];
- if (isset($_GET['category']) and isset($_GET['subcategory'])) {
-   $arr['cat'] = $_GET['subcategory'];
- } elseif (isset($_GET['category'])) {
-   $arr['cat'] = $_GET['category'];
- }
- if (isset($_GET['search'])) {
-   $arr['s'] = $_GET['search'];
- }
- $this->post_src = new WP_Query($arr);
+   ];
+   if (isset($_GET['category']) and isset($_GET['subcategory'])) {
+     $arr['cat'] = $_GET['subcategory'];
+   } elseif (isset($_GET['category'])) {
+     $arr['cat'] = $_GET['category'];
+   }
+   if (isset($_GET['search'])) {
+     $arr['s'] = $_GET['search'];
+   }
+   $this->post_src = new WP_Query($arr);
    // return get_posts($arr);
- return $this->post_src->posts;
-}
+   return $this->post_src->posts;
+ }
 
-function getCurrentSubcategory () {
+ function getCurrentSubcategory () {
   if (isset($_GET['subcategory'])) {
     foreach ($this->current_category['subcategories'] as $key => $value) {
       if ($value['id'] == $_GET['subcategory']) {

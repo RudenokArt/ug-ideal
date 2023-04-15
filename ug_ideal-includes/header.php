@@ -44,23 +44,23 @@ include_once 'interface_theme.php';
 	<div class="container">
 
 		<div class="row">
-			<div class="col-lg-6 col-md-6 d-lg-block d-md-block d-sm-none d-none text_color">
+			<div class="col-lg-6 col-md-6 d-lg-block d-md-block d-sm-none d-none text_color text_hover_color">
 				<div><?php echo $GLOBALS['company_contacts']->company_name; ?></div>
 			</div>
 		</div>
 
 		<div class="row">
-			<a href="/" class="col-lg-2 col-md-2 col-sm-2 col-3 p-0">
+			<a href="/" class="col-lg-2 col-md-2 col-sm-2 col-3 p-0 header-logo">
 				<img 
 				src="<?php echo $theme_url.'/ug_ideal-libs/dompdf/img/ug-ideal.png?='.time(); ?>"
-				class="w-75 d-lg-block d-md-none d-sm-none d-none">
+				class="d-lg-block d-md-none d-sm-none d-none">
 				<img src="<?php echo $theme_url.'/ug_ideal-libs/dompdf/img/ug-ideal.png?='.time(); ?>"
-				class="w-100 d-lg-none d-md-block d-sm-block d-block">
+				class="d-lg-none d-md-block d-sm-block d-block">
 			</a>
 			<div class="col-lg-10 col-md-10 col-sm-10 col-9">
 				<div class="row align-items-center justify-content-center">
 
-					<div class="col-lg-1 col-md-1 col-sm-2 col-2 h5 text_color">
+					<div class="col-lg-1 col-md-1 col-sm-2 col-2 h5 text_color text_hover_color">
 						<div class="header-drop_menu-wrapper">
 							<i class="fa fa-envelope-o" aria-hidden="true"></i>
 							<div class="header-drop_menu" style="right: -200px;">
@@ -73,7 +73,7 @@ include_once 'interface_theme.php';
 						</div>				
 					</div>
 
-					<div class="col-lg-1 col-md-1 col-sm-2 col-2 h5 text_color">
+					<div class="col-lg-1 col-md-1 col-sm-2 col-2 h5 text_color text_hover_color">
 						<div class="header-drop_menu-wrapper">
 							<i class="fa fa-phone" aria-hidden="true"></i>
 							<div class="header-drop_menu" style="right: -150px;">
@@ -90,7 +90,7 @@ include_once 'interface_theme.php';
 						</div>				
 					</div>
 
-					<div class="col-lg-1 col-md-1 col-sm-2 col-2 h5 text_color">
+					<div class="col-lg-1 col-md-1 col-sm-2 col-2 h5 text_color text_hover_color">
 						<div class="header-drop_menu-wrapper">
 							<div style="transform: scale(1.2);">
 								<svg width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
@@ -113,13 +113,13 @@ include_once 'interface_theme.php';
 
 					<?php foreach ($GLOBALS['company_contacts']->social_networks as $key => $value): ?>
 						<?php if ($value): ?>
-							<a href="<?php echo $value; ?>" class="text_color h5 col-1 d-lg-block d-md-none d-sm-none d-none">
+							<a href="<?php echo $value; ?>" class="text_color text_hover_color h5 col-1 d-lg-block d-md-none d-sm-none d-none">
 								<i class="fa fa-<?php echo $key;?>" aria-hidden="true"></i>
 							</a>
 						<?php endif ?>
 					<?php endforeach ?>
 
-					<div class="col-lg-1 col-md-1 col-sm-2 col-2 h1 text_color d-lg-none d-md-block d-sm-block d-block">
+					<div class="col-lg-1 col-md-1 col-sm-2 col-2 h1 text_color text_hover_color d-lg-none d-md-block d-sm-block d-block">
 						<div class="header-drop_menu-wrapper">
 							<i class="fa fa-bars" aria-hidden="true"></i>
 							<div class="header-drop_menu"  style="right: -50px;">
@@ -146,9 +146,9 @@ include_once 'interface_theme.php';
 
 				</div>
 				
-				<div class="header-main_menu-desktop d-lg-block d-md-none d-sm-none d-none text-center row border-top border-info">
+				<div class="header-main_menu-desktop d-lg-block d-md-none d-sm-none d-none text-center row">
 					<?php foreach ($main_menu_arr as $key => $value): ?>
-						<a href="<?php echo $value->url; ?>" class="text_color">
+						<a href="<?php echo $value->url; ?>" class="text_color text_hover_color">
 							<?php echo $value->title; ?>
 						</a>
 					<?php endforeach ?>

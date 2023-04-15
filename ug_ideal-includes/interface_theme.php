@@ -17,4 +17,12 @@
 	color: <?php echo $interface_theme['text_color'];?> !important;
 }
 
+.text_hover_color:hover {
+	color: <?php echo $interface_theme['hover_color'];?> !important;
+}
+
+.content_color {
+	color: <?php echo $interface_theme['content_color'];?> !important;
+}
+
 </style>

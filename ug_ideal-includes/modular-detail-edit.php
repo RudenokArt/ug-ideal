@@ -13,7 +13,8 @@ $detail_edit = new DetailEdit($_GET['edit']);
 				<img style="opacity: 0.8;"
 				v-bind:src="`<?php echo $photo_galery_url;?>${templates_arr[template_index].image_url}`" alt="">
 			</div>
-			<img v-bind:src="`<?php echo $photo_galery_url;?>${interiors_arr[interior_index].image_url}`"
+			<img v-if="interiors_arr[interior_index].image_url"
+			v-bind:src="`<?php echo $photo_galery_url;?>${interiors_arr[interior_index].image_url}`"
 			class="modular-edit-interior" alt="">	
 		</div>
 		<div class="col-lg-6 col-md-6 col-sm-12 col-12 pt-5">
@@ -59,6 +60,14 @@ $detail_edit = new DetailEdit($_GET['edit']);
 				<label class="form-label w-100">
 					<input v-model="imageSize" type="range" name="width" class="form-range w-100" min="50" max="150">
 				</label>
+
+				<div class="form-check form-switch">
+					<input name="image_expand" v-model="imageExpand" class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
+					<label class="form-check-label" for="flexSwitchCheckChecked">
+						Растянуть изображение на весь блок
+					</label>
+				</div>
+
 			</div>
 		</div>
 	</div>
@@ -77,6 +86,7 @@ $detail_edit = new DetailEdit($_GET['edit']);
 			verticalPosition: '<?php echo $detail_edit->top; ?>',
 			horizontalPosition: '<?php echo $detail_edit->left; ?>',
 			imageSize: '<?php echo $detail_edit->width; ?>',
+			imageExpand: '<?php echo $detail_edit->image_expand; ?>',
 		},
 		computed: {
 			imageStyle: function () {
@@ -107,6 +117,9 @@ class DetailEdit {
 		$this->templates_arr = $this->getGalleryArr('modular_templates');
 		$this->templates_json = json_encode($this->templates_arr);
 		$this->interiors_arr = $this->getGalleryArr('interiors');
+		$default_interior = new stdClass;
+		$default_interior->slug = 'Без интерьера';
+		array_unshift($this->interiors_arr, $default_interior);
 		$this->interiors_json = json_encode($this->interiors_arr);
 		$this->postContentParse();
 		if (isset($_POST['detail_edit']) and $_POST['detail_edit'] == 'Y') {
@@ -131,6 +144,9 @@ class DetailEdit {
 			if (isset($content['width'])) {
 				$this->width = $content['width'];
 			}
+			if (isset($content['image_expand'])) {
+				$this->image_expand = $content['image_expand'];
+			}
 			if (isset($content['template_id'])) {
 				foreach ($this->templates_arr as $key => $value) {
 					if ($value->id == $content['template_id']) {
@@ -153,11 +169,13 @@ class DetailEdit {
 		if (!$content) {
 			$content = [];
 		}
+		$content['image_expand'] = $_POST['image_expand'];
 		$content['template_id'] = $_POST['template_id'];
 		$content['interior_id'] = $_POST['interior_id'];
 		$content['top'] = $_POST['top'];
 		$content['left'] = $_POST['left'];
 		$content['width'] = $_POST['width'];
+		$content['image_expand'] = $_POST['image_expand'];
 		wp_update_post([
 			'ID' => $this->post_id,
 			'post_content' => json_encode($content),

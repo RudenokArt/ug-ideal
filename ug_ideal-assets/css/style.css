@@ -96,6 +96,17 @@ div, a {
 	z-index: 2;
 }
 
+.header-logo {
+	position: relative;
+}
+
+.header-logo img {
+	position: absolute;
+	top: 0;
+	left: 0;
+	max-height: 100%;
+}
+
 .header-drop_menu-wrapper {
 	cursor: pointer;
 	position: relative;

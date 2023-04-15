@@ -154,6 +154,83 @@ include_once 'ug_ideal-includes/header.php';
       }
     }
   });
+
+ $(function () {
+    $('#ug_ideal-catalog_slider').slick({
+      dots: false,
+      infinite: true,
+      arrows: true,
+      speed: 500,
+      slidesToShow: 5, 
+      slidesToScroll: 1,
+      responsive: [
+      {
+        breakpoint: 960,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1
+        }
+      },
+      {
+        breakpoint: 570,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      }
+      ]
+    });
+    sliderImagesRotation();
+    $('#ug_ideal-catalog_slider')
+    .on('afterChange', function(event, slick, currentSlide){
+      sliderImagesRotation();
+    });
+  });
+
+  function sliderImagesRotation () {
+
+    var sliderList = $('.ug_ideal-catalog_slider-item.slick-active');
+
+    if (sliderList.length == 5) {
+      $(sliderList[0]).find('img').css({
+        'transform': 'perspective(1000px) rotateY(45deg)',
+        'transition-duration': '0.5s',
+      });
+      $(sliderList[1]).find('img').css({
+        'transform': 'perspective(1000px) rotateY(30deg)',
+        'transition-duration': '0.5s',
+      });
+      $(sliderList[2]).find('img').css({
+        'transform': 'perspective(1000px) rotateY(0deg)',
+        'transition-duration': '0.5s',
+      });
+      $(sliderList[3]).find('img').css({
+        'transform': 'perspective(1000px) rotateY(-30deg)',
+        'transition-duration': '0.5s',
+      });
+      $(sliderList[4]).find('img').css({
+        'transform': 'perspective(1000px) rotateY(-45deg)',
+        'transition-duration': '0.5s',
+      });
+    }
+
+    if (sliderList.length == 3) {
+      $(sliderList[2]).find('img').css({
+        'transform': 'perspective(1000px) rotateY(45deg)',
+        'transition-duration': '0.5s',
+      });
+      $(sliderList[1]).find('img').css({
+        'transform': 'perspective(1000px) rotateY(0deg)',
+        'transition-duration': '0.5s',
+      });
+      $(sliderList[0]).find('img').css({
+        'transform': 'perspective(1000px) rotateY(-45deg)',
+        'transition-duration': '0.5s',
+      });
+    }
+
+  }
+
 </script>
 
 <?php get_footer(); ?>

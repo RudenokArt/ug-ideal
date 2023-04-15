@@ -5,80 +5,80 @@
 
 	<div class="row pt-5 pb-5">
 		<div class="col">
-			<a href="<?php echo $_SESSION['back_page_url'];?>" class="btn btn-outline-info w-100">
-				<i class="fa fa-chevron-left" aria-hidden="true"></i>
-				Вернуться в галерею
-			</a>
-		</div>
-	</div>
+			<a href="<?php echo $_SESSION['back_page_url'];?>" class="btn btn-outline-light border w-100">
+        <div class="content_color text_hover_color w-100">
+          <i class="fa fa-chevron-left" aria-hidden="true"></i>
+          Вернуться в галерею
+        </div>				
+      </a>
+    </div>
+  </div>
 
-	<div class="row">
+  <div class="row">
 
-		<div class="col-lg-8 col-md-12 col-sm-12 col-12 p-0 wallpaper-wall_wrapper">
-			<div class="wallpaper-wall" id="wallpaper-wall">
-        <img  src="<?php echo $photo_galery_url.$wallpaper_detail->image->image_url.'?v='.time();?>"
-        v-bind:style="imageStyle" id="wallpaper-image"
-        alt="<?php echo $photo_galery_url.$wallpaper_detail->image->image_url; ?>" class="wallpaper-image">
-        <div class="wallpaper-wall_height" v-bind:style="wallHeightStyle"></div>
-        <div class="wallpaper-wall_height-bottom" v-bind:style="wallHeightStyle"></div>
-        <div class="wallpaper-axix_Y" v-bind:style="wallpaperAxixY">
-          <span>{{wallHeigh}} см</span>
-        </div>
-        <div class="wallpaper-wall_width" v-bind:style="wallWidthStyle">
-
-        </div>
-        <div class="wallpaper-wall_width-left" v-bind:style="wallWidthStyle"></div>
-        <div class="wallpaper-axix_X" v-bind:style="wallpaperAxixX">
-          <div class="wallpaper-roll-tape">
-            <?php for ($i=0; $i < 10; $i++): ?>
-              <div class="wallpaper-roll" v-bind:style="rollWidthStyle"></div>
-            <?php endfor; ?>
-          </div>
-          <span>{{wallWidth}} см</span>
-        </div>
+    <div class="col-lg-8 col-md-12 col-sm-12 col-12 p-0 wallpaper-wall_wrapper">
+     <div class="wallpaper-wall" id="wallpaper-wall">
+      <img  src="<?php echo $photo_galery_url.$wallpaper_detail->image->image_url.'?v='.time();?>"
+      v-bind:style="imageStyle" id="wallpaper-image"
+      alt="<?php echo $photo_galery_url.$wallpaper_detail->image->image_url; ?>" class="wallpaper-image">
+      <div class="wallpaper-wall_height" v-bind:style="wallHeightStyle"></div>
+      <div class="wallpaper-wall_height-bottom" v-bind:style="wallHeightStyle"></div>
+      <div class="wallpaper-axix_Y" v-bind:style="wallpaperAxixY">
+        <span>{{wallHeigh}} см</span>
       </div>
+      <div class="wallpaper-wall_width" v-bind:style="wallWidthStyle">
 
-
-      <div class="modular_detail-favorite-icon">
-        <a href="#" v-if="!favoriteAddStarIcon" v-on:click.prevent="addToFavorite" title="Добавить в избранное" class="h3">
-          <i class="fa fa-star-o" aria-hidden="true"></i>
-        </a>
-        <a href="#" v-if="favoriteAddStarIcon" v-on:click.prevent="removeFromFavorite"title="Удалить из избранного" class="h3">
-          <i class="fa fa-star" aria-hidden="true"></i>
-        </a>
       </div>
-
+      <div class="wallpaper-wall_width-left" v-bind:style="wallWidthStyle"></div>
+      <div class="wallpaper-axix_X" v-bind:style="wallpaperAxixX">
+        <div class="wallpaper-roll-tape">
+          <?php for ($i=0; $i < 10; $i++): ?>
+            <div class="wallpaper-roll" v-bind:style="rollWidthStyle"></div>
+          <?php endfor; ?>
+        </div>
+        <span>{{wallWidth}} см</span>
+      </div>
     </div>
 
-    <div class="col-lg-4 col-md-12 col-sm-12 col-12">
-     <div class="row">
-      <div class="col-6">
-       Высота стены (см): 
-     </div>
-     <div class="col-6">
-       <input type="number" v-model="wallHeigh" class="form-control w-50 p-0 text-center" step="1" max="300" min="50">
-     </div>
-     <div class="col-12">
-       <input type="range" class="form-range" max="300" min="50" v-model="wallHeigh">
-     </div>
-   </div>
+
+    <div class="modular_detail-favorite-icon">
+      <a href="#" v-if="!favoriteAddStarIcon" v-on:click.prevent="addToFavorite" title="Добавить в избранное" class="h3">
+        <i class="fa fa-star-o" aria-hidden="true"></i>
+      </a>
+      <a href="#" v-if="favoriteAddStarIcon" v-on:click.prevent="removeFromFavorite"title="Удалить из избранного" class="h3">
+        <i class="fa fa-star" aria-hidden="true"></i>
+      </a>
+    </div>
+
+  </div>
+
+  <div class="col-lg-4 col-md-12 col-sm-12 col-12">
    <div class="row">
-    <div class="col-6">
-     Ширина стены (см): 
+    <div class="col-6 content_color">
+     Высота стены (см): 
    </div>
    <div class="col-6">
-     <input type="number" v-model="wallWidth" class="form-control w-50 p-0 text-center" step="1" max="500" min="50">
+     <input type="number" v-model="wallHeigh" class="form-control w-50 p-0 text-center" step="1" max="300" min="50">
    </div>
    <div class="col-12">
-     <input type="range" class="form-range" max="500" min="50" v-model="wallWidth">
+     <input type="range" class="form-range" max="300" min="50" v-model="wallHeigh">
    </div>
  </div>
-
  <div class="row">
-  <div class="col-12">
-    <span class="text-info">
-      <i class="fa fa-expand" aria-hidden="true"></i>
-    </span>
+  <div class="col-6 content_color">
+   Ширина стены (см): 
+ </div>
+ <div class="col-6">
+   <input type="number" v-model="wallWidth" class="form-control w-50 p-0 text-center" step="1" max="500" min="50">
+ </div>
+ <div class="col-12">
+   <input type="range" class="form-range" max="500" min="50" v-model="wallWidth">
+ </div>
+</div>
+
+<div class="row">
+  <div class="col-12 content_color">
+    <i class="fa fa-expand" aria-hidden="true"></i>
     Масштаб изображения: {{imageWidth}} %
   </div>
   <div class="col-12">
@@ -87,10 +87,8 @@
 </div>
 
 <div class="row">
-  <div class="col-12">
-    <span class="text-info">
-      <i class="fa fa-arrows-v" aria-hidden="true"></i>
-    </span>
+  <div class="col-12 content_color">
+    <i class="fa fa-arrows-v" aria-hidden="true"></i>
     по вертикали:
   </div>
   <div class="col-12">
@@ -99,10 +97,8 @@
 </div>
 
 <div class="row">
-  <div class="col-12">
-    <span class="text-info">
-      <i class="fa fa-arrows-h" aria-hidden="true"></i>
-    </span>
+  <div class="col-12 content_color">
+    <i class="fa fa-arrows-h" aria-hidden="true"></i>
     по горизонтали:
   </div>
   <div class="col-12">
@@ -110,11 +106,9 @@
   </div>
 </div>
 <hr>
-<div class="row">
+<div class="row content_color">
   <div class="col-12">
-    <span class="text-info">
-      <i class="fa fa-repeat" aria-hidden="true"></i>
-    </span>
+    <i class="fa fa-repeat" aria-hidden="true"></i>
     Поворот:
   </div>
   <?php foreach ($wallpaper_detail->rotation_arr as $key => $value): ?>
@@ -125,7 +119,7 @@
 <?php endforeach ?>
 </div>
 <hr>
-<div class="row">
+<div class="row content_color">
   <div class="col-12">
     Зеркало:
   </div>
@@ -138,7 +132,7 @@
 </div>
 <hr>
 
-<div class="row">
+<div class="row content_color">
   <div class="col-lg-6 col-md-6 col-sm-12 col-12">
     Ширина рулона (см):
     <select class="form-select" v-model="currentSize">
@@ -164,39 +158,51 @@
 
 <div class="row pt-3">
   <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-    <div class="alert alert-info">
-      Стоимость: {{priceTotal}} руб
+    <div class="alert alert-light border">
+      <div class="content_color w-100">
+        Стоимость: {{priceTotal}} руб.
+      </div>      
     </div>
   </div>
   <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-    <button v-on:click="PopupShow('interiorsPopUp')" class=" btn btn-outline-info w-100 mt-1">
-      <i class="fa fa-camera" aria-hidden="true"></i>
-      Просмотреть в интерьере
-    </button>
-    <button v-on:click="fileUploadTrigger" class=" btn btn-outline-info w-100 mt-1">
+    <button v-on:click="PopupShow('interiorsPopUp')" class=" btn btn-outline-light border w-100 mt-1">
+      <div class="content_color text_hover_color w-100">
+       <i class="fa fa-camera" aria-hidden="true"></i>
+       Просмотреть в интерьере
+     </div>     
+   </button>
+   <button v-on:click="fileUploadTrigger" class=" btn btn-outline-light border w-100 mt-1">
+    <div class="content_color text_hover_color w-100">
       <i class="fa fa-cloud-upload" aria-hidden="true"></i>
       Загрузить свое фото
-    </button>
-  </div>
+    </div>
+  </button>
+</div>
 
-  <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-    <button v-on:click="ImageOrder('download')" class=" btn btn-outline-info w-100 mt-1">
+<div class="col-lg-3 col-md-6 col-sm-6 col-12">
+  <button v-on:click="ImageOrder('download')" class=" btn btn-outline-light border w-100 mt-1">
+    <div class="content_color text_hover_color w-100">
       <i class="fa fa-cloud-download" aria-hidden="true"></i>
       Скачать изображение
-    </button>
-    <button v-on:click.prevent="PopupShow('mailPopup')" class=" btn btn-outline-info w-100 mt-1">
+    </div>
+  </button>
+  <button v-on:click.prevent="PopupShow('mailPopup')" class=" btn btn-outline-light border w-100 mt-1">
+    <div class="content_color text_hover_color w-100">
       <i class="fa fa-envelope" aria-hidden="true"></i>
       Получить на почту
-    </button>
-  </div>
+    </div>
+  </button>
+</div>
 
 
-  <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-    <button v-on:click.prevent="PopupShow('orderPopup')" class=" btn btn-outline-info w-100 mt-1">
-      <i class="fa fa-handshake-o" aria-hidden="true"></i>
-      Оформить заказ
-    </button>
-  </div>
+<div class="col-lg-3 col-md-6 col-sm-6 col-12">
+  <button v-on:click.prevent="PopupShow('orderPopup')" class=" btn btn-outline-light border w-100 mt-1">
+    <div class="content_color text_hover_color w-100">
+     <i class="fa fa-handshake-o" aria-hidden="true"></i>
+     Оформить заказ
+   </div>   
+ </button>
+</div>
 
 </div>
 

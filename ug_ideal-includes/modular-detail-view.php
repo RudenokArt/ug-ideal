@@ -84,9 +84,11 @@ $modular_discount = 0;
 <div class="container pt-5 pb-5 modular_detail" id="modular_detail">
   <div class="row pt-5 pb-5">
     <div class="col">
-      <a href="<?php echo $_SESSION['back_page_url'];?>" class="btn btn-outline-info w-100">
-        <i class="fa fa-chevron-left" aria-hidden="true"></i>
-        Вернуться в галерею
+      <a href="<?php echo $_SESSION['back_page_url'];?>" class="btn btn-outline-light border w-100">
+        <div class="content_color text_hover_color w-100">
+          <i class="fa fa-chevron-left" aria-hidden="true"></i>
+          Вернуться в галерею
+        </div>
       </a>
     </div>
   </div>
@@ -98,7 +100,7 @@ $modular_discount = 0;
       <div class="row justify-content-center pt-2">
         <div id="modular_detail-template_slider" class="col-lg-10 col-md-9 col-sm-8 col-8 modular_detail-template_slider">
          <?php foreach ($templates_arr as $key => $value): ?>
-          <div v-on:click="SetCurrentTemplate(<?php echo $key;?>)" class="bg-info">
+          <div v-on:click="SetCurrentTemplate(<?php echo $key;?>)" class="theme_color">
            <img src="<?php echo $photo_galery_url.$value->image_url; ?>" class="w-100">
          </div>            
        <?php endforeach ?>
@@ -131,7 +133,7 @@ $modular_discount = 0;
 <div class="col-lg-6 col-md-6 col-sm-12 col-12">
 
  <div class="p-2 row">
-  <div class="col-2 text-end text-info">
+  <div class="col-2 text-end content_color">
    <i class="fa fa-arrows-v" aria-hidden="true"></i>
  </div>
  <div class="col-10">
@@ -140,7 +142,7 @@ $modular_discount = 0;
 </div>
 
 <div class="p-2 row">
-  <div class="col-2 text-end text-info">
+  <div class="col-2 text-end content_color">
    <i class="fa fa-arrows-h" aria-hidden="true"></i>
  </div>
  <div class="col-10">
@@ -149,7 +151,7 @@ $modular_discount = 0;
 </div>
 
 <div class="p-2 row">
-  <div class="col-2 text-end text-info">
+  <div class="col-2 text-end content_color">
    <i class="fa fa-expand" aria-hidden="true"></i>
  </div>
  <div class="col-10">
@@ -159,11 +161,11 @@ $modular_discount = 0;
 
 <hr>
 <div class="pt-2 row">
-  <div class="col text-end text-info">
+  <div class="col text-end content_color">
    <i class="fa fa-repeat" aria-hidden="true"></i>
  </div>
  <?php foreach ($rotation_arr as $key => $value): ?>
-   <label class="col" style="white-space: nowrap;">
+   <label class="col content_color" style="white-space: nowrap;">
     <input v-model="imageRotate" value="<?php echo $value; ?>" type="radio" name="rotation" class="form-check-input">
     <?php echo $key; ?><sup>0</sup>
   </label>					
@@ -172,11 +174,11 @@ $modular_discount = 0;
 
 <hr>
 <div class="pt-2 row justify-content-center">
-  <div class="col-5 text-uppercase text-info">
+  <div class="col-5 text-uppercase content_color">
    <b>Зеркало:</b>
  </div>
  <?php foreach ($reflection_arr as $key => $value): ?>
-   <label class="col-5 p-1 ">
+   <label class="col-5 p-1 content_color">
     <input type="radio" v-model="imageReflection" value="<?php echo $value[0]; ?>" name="reflection" class="form-check-input">
     <?php echo $value[1] ?>
   </label>
@@ -186,7 +188,7 @@ $modular_discount = 0;
 
 <div class="row">
   <div class="col-6">
-   Размер:
+   <span class="content_color">Размер:</span>
    <select class="form-select" v-model="templateSize">
     <template v-for="(item, index) in sizeArr" >
      <option v-bind:value="index" v-if="templatePrice[item.ID]">
@@ -196,7 +198,7 @@ $modular_discount = 0;
 </select>
 </div>
 <div class="col-6">
- Материал:
+ <span class="content_color">Материал:</span>
  <select class="form-select" v-model="templateMat">
   <template v-for="(item, index) in matArr" >
    <option v-bind:value="index">
@@ -206,9 +208,11 @@ $modular_discount = 0;
 </select>
 </div>
 <div class="col-lg-6 col-md-6 col-sm-12 col-12 pt-2">
- <div class="alert alert-info">
-  СТОИМОСТЬ:
-  {{totalPrice}} руб.
+ <div class="alert alert-light border">
+  <span class="content_color">
+   СТОИМОСТЬ:
+   {{totalPrice}} руб.
+ </span>
 </div>
 
 </div>
@@ -229,39 +233,49 @@ $modular_discount = 0;
 <div class="row">
   <div class="col-6">
    <button v-on:click="PopupShow('modular_detail-interior_popup')"
-   class="btn btn-outline-info w-100">
-   <i class="fa fa-camera" aria-hidden="true"></i>
-   Просмотр в интерьере
- </button>
+   class="btn btn-outline-light border w-100">
+   <div class="content_color text_hover_color w-100">
+    <i class="fa fa-camera" aria-hidden="true"></i>
+    Просмотр в интерьере
+  </div>  
+</button>
 </div>
 
 <div class="col-6">
-  <button v-on:click="OrderImage('download')" class="btn btn-outline-info w-100">
-   <i class="fa fa-cloud-download" aria-hidden="true"></i>
-   Скачать изображение
+  <button v-on:click="OrderImage('download')" class="btn btn-outline-light border w-100">
+    <div class="content_color text_hover_color w-100">
+     <i class="fa fa-cloud-download" aria-hidden="true"></i>
+     Скачать изображение
+   </div>  
  </button>
 </div>
 
 <div class="col-6 pt-2">
-  <button v-on:click="PopupShow('modular_detail-mail_popup')" class="btn btn-outline-info w-100">
-   <i class="fa fa-envelope-o" aria-hidden="true"></i>
-   Получить на почту
+  <button v-on:click="PopupShow('modular_detail-mail_popup')" class="btn btn-outline-light border w-100">
+    <div class="content_color text_hover_color w-100">
+     <i class="fa fa-envelope-o" aria-hidden="true"></i>
+     Получить на почту
+   </div>
  </button>
 </div>
 
 <div class="col-6 pt-2">
-  <button v-on:click="PopupShow('modular_detail-order_popup')" class="btn btn-outline-info w-100">
-   <i class="fa fa-handshake-o" aria-hidden="true"></i>
-   Оформить заказ
- </button>
+  <button v-on:click="PopupShow('modular_detail-order_popup')" class="btn btn-outline-light border w-100">
+    <div  class="content_color text_hover_color w-100">
+       <i class="fa fa-handshake-o" aria-hidden="true"></i>
+      Оформить заказ
+    </div>
+  </button>
 </div>
 
 <div class="row">
   <form action="" method="post" enctype="multipart/form-data" class="col-6 pt-2" id="customerImage">
-    <label class="btn btn-outline-info w-100">
-      <i class="fa fa-cloud-upload" aria-hidden="true"></i>
+    <label class="btn btn-outline-light border w-100">
+      <div class="content_color text_hover_color w-100">
+        <i class="fa fa-cloud-upload" aria-hidden="true"></i>
       Загрузить свое фото
       <input type="file" class="btn btn-outline-info" name="customer_image" v-on:change="CustomerImageUpload">
+      </div>
     </label>
   </form>
 </div>
@@ -587,8 +601,8 @@ return price;
 totalPrice: function () {
   return Math.floor(
     this.templatePrice[this.sizeArr[this.templateSize].ID] *
-  (this.matArr[this.templateMat].post_content / 100 + 1)
-  );
+    (this.matArr[this.templateMat].post_content / 100 + 1)
+    );
   return Math.floor(
    this.templatePrice *
    (this.sizeArr[this.templateSize].post_content / 100 + 1) *
