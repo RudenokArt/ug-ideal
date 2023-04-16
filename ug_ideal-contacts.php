@@ -24,9 +24,9 @@ $maps_yandex_arr = [
 				<div class="h4">
 					<?php echo $GLOBALS['company_contacts']->company_name; ?>
 				</div>
-				<div class="h5"><?php echo $value; ?></div>
-				<?php if ($maps_yandex_arr[$key]): ?>
-					<?php echo $maps_yandex_arr[$key]; ?>
+				<div class="h5"><?php echo $value->post_title; ?></div>
+				<?php if ($value->post_content): ?>
+					<?php echo $value->post_content; ?>
 				<?php else: ?>
 							<div class="col-lg-6 col-md-12 col-sm-12 col-12">
 			<?php foreach ($GLOBALS['company_contacts']->company_phones as $key => $value): ?>

@@ -9,7 +9,7 @@
 				</div>
 				<?php foreach ($GLOBALS['company_contacts']->company_address as $key => $value): ?>
 					<div class="pt-1">
-						<?php echo $value; ?>
+						<?php echo $value->post_title; ?>
 					</div>
 				<?php endforeach ?>
 			</div>

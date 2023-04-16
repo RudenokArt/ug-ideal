@@ -133,29 +133,35 @@ $company_contacts = new Company();
 
   </div>
 
-  <div class="row pt-5">
+  <div class="row pt-2 mt-2 mb-5 border border-info pb-2">
     <!-- <script src="https://cdn.ckeditor.com/4.20.2/basic/ckeditor.js"></script> -->
     <div class="col-12">
       <div class="h4">Адреса компании:</div>
-      <form action="" method="post" class="border p-2">
-        <textarea name="post_content-edit" class="form-control" rows="1" required></textarea>
-        <!-- <textarea name="post_content" class="form-control" id="add_company_address" required></textarea> -->
-        <button class="btn btn-outline-success w-100 mt-1" name="add_company_address" value="Y">
-          <span class="dashicons dashicons-yes"></span>
-          Добавить адрес
-        </button>
-      </form>
       <table class="table border mt-3">
-        <tr><th class="text-info">Адреса:</th><th></th></tr>
-        <?php if ($company_contacts->company_address_arr): ?>
-          <?php foreach ($company_contacts->company_address_arr as $key => $value): ?>
+        <?php if ($company_contacts->company_address): ?>
+          <?php foreach ($company_contacts->company_address as $key => $value): ?>
             <tr class="tr">
               <td class="td">
-                <?php print_r($value); ?>
+                <form action="" method="post" class="row">
+                  <div class="col-10">
+                    Адрес:
+                    <textarea name="address" rows="1" class="form-control" required><?php echo $value->post_title?></textarea>
+                    Код карты:
+                    <textarea name="map" rows="2" class="form-control mt-1"><?php echo $value->post_content; ?></textarea>
+                  </div>
+                  <div class="col-2">
+                    <br>
+                    <button name="edit_company_address" value="<?php echo $value->ID; ?>"
+                      class="btn btn-outline-success" title="Сохранить">
+                      <span class="dashicons dashicons-yes"></span>
+                    </button>
+                  </div>
+                </form>
               </td>
-              <td>
+              <td width="100">
+                <br>
                 <form action="" method="post">
-                  <button name="delete_company_address" value="<?php echo $key;?>" class="btn btn-outline-danger" title="Удалить">
+                  <button name="delete_company_address" value="<?php echo $value->ID; ?>" class="btn btn-outline-danger" title="Удалить">
                     <span class="dashicons dashicons-trash"></span>
                   </button>
                 </form>
@@ -164,6 +170,15 @@ $company_contacts = new Company();
           <?php endforeach ?>   
         <?php endif ?>
       </table>
+      <form action="" method="post" class="border p-2">
+        <div class="h5 text-info">Добавить адрес:</div>
+        <textarea name="address" class="form-control" rows="1" placeholder="Адрес" required></textarea>
+        <textarea name="map" class="form-control mt-1" rows="1" placeholder="Код карты"></textarea>
+        <button class="btn btn-outline-success w-100 mt-1" name="add_company_address" value="Y">
+          <span class="dashicons dashicons-yes"></span>
+          Сохранить
+        </button>
+      </form>
     </div>
     <script>
       // CKEDITOR.replace( 'post_content-edit', {height: 200} );
@@ -194,3 +209,5 @@ $company_contacts = new Company();
 
 
 </div>
+
+<pre><?php print_r($company_contacts->company_address) ?></pre>

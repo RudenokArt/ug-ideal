@@ -100,7 +100,7 @@ include_once 'interface_theme.php';
 							<div class="header-drop_menu h6" style="right: -100px;">
 								<?php foreach ($GLOBALS['company_contacts']->company_address as $key => $value): ?>
 									<a href="/contacts/" class="header-drop_menu-item d-block p-2 m-0">
-										<?php echo $value; ?>
+										<?php echo $value->post_title; ?>
 									</a>
 								<?php endforeach ?>
 								<div class="text-info p-3">

@@ -22,10 +22,12 @@ class Company_data {
 			'name' => 'work_time',
 		])[0]->post_content;
 
-		$this->company_address = json_decode(get_posts([
-			'category_name' => 'company_contacts',
-			'name' => 'company_address',
-		])[0]->post_content);
+		$this->company_address  = get_posts([
+			'category_name' => 'company_address',
+			'post_type' => 'post',
+			'orderby'     => 'ID',
+			'order'       => 'ASC',
+		]);
 
 		$this->company_email = json_decode(get_posts([
 			'category_name' => 'company_contacts',
@@ -42,7 +44,7 @@ class Company_data {
 			'name' => 'social_networks',
 		])[0]->post_content);
 
-		$this->company_address_html = $this->htmlHelper($this->company_address);
+		// $this->company_address_html = $this->htmlHelper($this->company_address);
 		$this->company_email_html = $this->htmlHelper($this->company_email);
 		$this->company_phones_html = $this->htmlHelper($this->company_phones);
 	}
