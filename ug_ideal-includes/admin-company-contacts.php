@@ -209,5 +209,3 @@ $company_contacts = new Company();
 
 
 </div>
-
-<pre><?php print_r($company_contacts->company_address) ?></pre>
