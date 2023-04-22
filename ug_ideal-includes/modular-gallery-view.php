@@ -79,6 +79,9 @@ $_SESSION['back_page_url'] = $_SERVER['REQUEST_URI'];
           <?php endif ?>
         <?php endforeach ?>
       </div>
+
+      <?php include_once 'sidebar-blog-articles.php'; ?>
+      
     </div>
 
     <div class="col-lg-9 col-md-8 col-sm-6 col-12">
