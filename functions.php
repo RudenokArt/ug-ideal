@@ -310,7 +310,7 @@ function publish_post_action( $post_id, $post ) {
 			$mail_data = [
 				'subject' => $post->post_title,
 				'body' => $post->post_title . ' - <a href="http://'.$_SERVER['HTTP_HOST'] . 
-				'/blog_articles/?article='.$post_id.'">подробнее...</a>='.$value,
+				'/blog_articles/?article='.$post_id.'">подробнее...</a>',
 				'customer_mail' => $value,
 			];
 			file_get_contents(get_stylesheet_directory_uri().'/ug_ideal-libs/PHPMailer?'.http_build_query($mail_data));
