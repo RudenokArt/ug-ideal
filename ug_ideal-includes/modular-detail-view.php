@@ -504,7 +504,7 @@ $modular_discount = 0;
       mailData.set('subject', 'Заказ модульной картины');
       mailData.set('body', 'Юг-идеал. Заказ модульной картины');
       mailData.set('file_path', '<?php echo get_stylesheet_directory(); ?>/ug_ideal-libs/dompdf/modular_order.pdf');
-      var order = await $.get(this.theme_url + '/ug_ideal-libs/PHPMailer?' + mailData.toString());
+      var order = await $.get(this.theme_url + '/ug_ideal-libs/PHPMailer/?' + mailData.toString());
       return true;
     },
     // test@mail.ru
@@ -515,7 +515,7 @@ $modular_discount = 0;
       mailData.set('subject', 'Эскиз модульной картины');
       mailData.set('body', 'Юг-идеал. Эскиз модульной картины');
       mailData.set('file_path', '<?php echo get_stylesheet_directory(); ?>/ug_ideal-libs/dompdf/modular_order.pdf');
-      var order = await $.get(this.theme_url + '/ug_ideal-libs/PHPMailer?' + mailData.toString());
+      var order = await $.get(this.theme_url + '/ug_ideal-libs/PHPMailer/?' + mailData.toString());
       return true;
     },
 

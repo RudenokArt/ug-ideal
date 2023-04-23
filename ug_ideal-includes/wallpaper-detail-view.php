@@ -494,7 +494,7 @@ http://cx57370-wordpress.tw1.ru/wp-content/themes/generatepress/ug_ideal-core/or
           window.open(this.theme_url + '/ug_ideal-libs/dompdf/wallpaper_order.pdf?v='+Math.random(), '_blank');
         }
         if (action == 'email') {
-          var order = await $.get(this.theme_url + '/ug_ideal-libs/PHPMailer?' + orderData.toString());
+          var order = await $.get(this.theme_url + '/ug_ideal-libs/PHPMailer/?' + orderData.toString());
           this.PopupHide('mailPopup');
           this.alert_text = 'Эскиз отправлен на указанную почту.';
           this.PopupShow('alertPopup');
@@ -503,7 +503,7 @@ http://cx57370-wordpress.tw1.ru/wp-content/themes/generatepress/ug_ideal-core/or
           orderData.set('subject', 'Заказ фотообоев');
           orderData.set('body', 'Юг-идеал. Заказ фотообоев');
           orderData.set('order_mail', 'Y');
-          var order = await $.get(this.theme_url + '/ug_ideal-libs/PHPMailer?' + orderData.toString());
+          var order = await $.get(this.theme_url + '/ug_ideal-libs/PHPMailer/?' + orderData.toString());
           this.PopupHide('orderPopup');
           this.alert_text = 'Заказ направлен менеджеру. Мы свяжемся с вами. Подробности заказа высланы на указанную почту.';
           this.PopupShow('alertPopup');

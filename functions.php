@@ -313,7 +313,7 @@ function publish_post_action( $post_id, $post ) {
 				'/blog_articles/?article='.$post_id.'">подробнее...</a>',
 				'customer_mail' => $value,
 			];
-			file_get_contents(get_stylesheet_directory_uri().'/ug_ideal-libs/PHPMailer?'.http_build_query($mail_data));
+			file_get_contents(get_stylesheet_directory_uri().'/ug_ideal-libs/PHPMailer/?'.http_build_query($mail_data));
 			sleep(0.1);
 		}
 		add_post_meta($post_id, 'email_subscriptions', 'Y', true);
