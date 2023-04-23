@@ -161,3 +161,49 @@ div, a {
 	text-decoration: none;
 }
 /*END HEADER*/
+
+
+/*FOOTER*/
+
+.subscriptions_popup-wrapper {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100vw;
+	height: auto;
+	display:none;
+	z-index: 1;
+}
+.subscriptions_popup-show,
+.subscriptions_popup-close {
+	position: absolute;
+	top: -30px;
+	right: 20px;
+	height: 40px;
+	width: 50px;
+	font-size: 20px;
+	padding: 5px;
+	border-radius: 10px;
+	cursor: pointer;
+}
+.subscriptions_popup-show{
+	position: fixed;
+	top: auto;
+	bottom: -10px;
+}
+
+.email_subscriptions_popup-wrapper {
+	background-color: rgba(0, 0, 0, 0.2);
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+}
+
+.email_subscriptions_popup-inner {
+	margin: auto;
+}
+
+/*END FOOTER*/

@@ -3,7 +3,7 @@
     <input type="text" name="search" class="form-control" placeholder="Поиск по артикулу">
   </div>
   <div class="col-4">
-    <button class="btn btn-lg btn-outline-info h-100">
+    <button class="btn btn-lg btn-outline-info">
       <i class="fa fa-search" aria-hidden="true"></i>
     </button>
   </div>        

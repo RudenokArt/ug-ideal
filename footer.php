@@ -49,6 +49,8 @@
 	</div>
 </div>
 
+<?php include_once 'ug_ideal-includes/subscriptions.php'; ?>
+
 <?php
 /**
  * The template for displaying the footer.

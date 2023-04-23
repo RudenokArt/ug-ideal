@@ -124,12 +124,12 @@ require $theme_dir . '/inc/structure/sidebars.php';
 
 
 function remove_plugin_updates($value) {
-  return null;
+	return null;
 }
 add_filter('site_transient_update_plugins', 'remove_plugin_updates');
 
 function remove_theme_updates($value) {
-  return null;
+	return null;
 }
 add_filter('site_transient_update_themes', 'remove_theme_updates');
 
@@ -182,8 +182,8 @@ function true_top_menu_page(){
   //   'admin-modular-discount', // ярлык страницы
   //   'admin_modular_discount' // функция, которая выводит содержимое страницы
   // );
-  add_submenu_page(
-    'ug_ideal_admin',
+	add_submenu_page(
+		'ug_ideal_admin',
     'Модульные - категории', // тайтл страницы
     'Модульные - категории', // текст ссылки в меню
     'manage_options', // права пользователя, необходимые для доступа к странице
@@ -191,8 +191,8 @@ function true_top_menu_page(){
     'admin_modular_categories' // функция, которая выводит содержимое страницы
   );
 
-  add_submenu_page(
-    'ug_ideal_admin',
+	add_submenu_page(
+		'ug_ideal_admin',
     'Фотообои - ширина рулонов', // тайтл страницы
     'Фотообои - ширина рулонов', // текст ссылки в меню
     'manage_options', // права пользователя, необходимые для доступа к странице
@@ -200,8 +200,8 @@ function true_top_menu_page(){
     'admin_wallpaper_roll_size' // функция, которая выводит содержимое страницы
   );
 
-  add_submenu_page(
-    'ug_ideal_admin',
+	add_submenu_page(
+		'ug_ideal_admin',
     'Фотообои - фактуры и цены', // тайтл страницы
     'Фотообои - фактуры и цены', // текст ссылки в меню
     'manage_options', // права пользователя, необходимые для доступа к странице
@@ -209,8 +209,8 @@ function true_top_menu_page(){
     'admin_wallpaper_textures' // функция, которая выводит содержимое страницы
   );
 
-  add_submenu_page(
-    'ug_ideal_admin',
+	add_submenu_page(
+		'ug_ideal_admin',
     'Фотообои - категории', // тайтл страницы
     'Фотообои - категории', // текст ссылки в меню
     'manage_options', // права пользователя, необходимые для доступа к странице
@@ -218,8 +218,8 @@ function true_top_menu_page(){
     'admin_wallpaper_categories' // функция, которая выводит содержимое страницы
   );
 
-  add_submenu_page(
-    'ug_ideal_admin',
+	add_submenu_page(
+		'ug_ideal_admin',
     'Фотокаталог - слайдер', // тайтл страницы
     'Фотокаталог - слайдер', // текст ссылки в меню
     'manage_options', // права пользователя, необходимые для доступа к странице
@@ -227,8 +227,8 @@ function true_top_menu_page(){
     'admin_catalog_slider' // функция, которая выводит содержимое страницы
   );
 
-  add_submenu_page(
-    'ug_ideal_admin',
+	add_submenu_page(
+		'ug_ideal_admin',
     'Компания, контакты', // тайтл страницы
     'Компания, контакты', // текст ссылки в меню
     'manage_options', // права пользователя, необходимые для доступа к странице
@@ -236,8 +236,8 @@ function true_top_menu_page(){
     'admin_company_contacts' // функция, которая выводит содержимое страницы
   );
 
-  add_submenu_page(
-    'ug_ideal_admin',
+	add_submenu_page(
+		'ug_ideal_admin',
     'Тема интерфейса', // тайтл страницы
     'Тема интерфейса', // текст ссылки в меню
     'manage_options', // права пользователя, необходимые для доступа к странице
@@ -265,33 +265,58 @@ function admin_modular_template_price () {
 }
 
 function admin_modular_discount () {
-  include_once 'ug_ideal-includes/admin-modular-discount.php';
+	include_once 'ug_ideal-includes/admin-modular-discount.php';
 }
 
 function admin_modular_categories () {
-  include_once 'ug_ideal-includes/admin-modular-categories.php';
+	include_once 'ug_ideal-includes/admin-modular-categories.php';
 }
 
 function admin_wallpaper_roll_size () {
-  include_once 'ug_ideal-includes/admin-wallpaper-roll-size.php';
+	include_once 'ug_ideal-includes/admin-wallpaper-roll-size.php';
 }
 
 function admin_wallpaper_textures () {
-  include_once 'ug_ideal-includes/admin-wallpaper-textures.php';
+	include_once 'ug_ideal-includes/admin-wallpaper-textures.php';
 }
 
 function admin_wallpaper_categories () {
-  include_once 'ug_ideal-includes/admin-wallpaper-categories.php';
+	include_once 'ug_ideal-includes/admin-wallpaper-categories.php';
 }
 
 function admin_catalog_slider () {
-  include_once 'ug_ideal-includes/admin-catalog-slider.php';
+	include_once 'ug_ideal-includes/admin-catalog-slider.php';
 }
 
 function admin_company_contacts () {
-  include_once 'ug_ideal-includes/admin-company-contacts.php';
+	include_once 'ug_ideal-includes/admin-company-contacts.php';
 }
 
 function admin_interface_theme () {
-  include_once 'ug_ideal-includes/admin-interface-theme.php';
+	include_once 'ug_ideal-includes/admin-interface-theme.php';
+}
+
+// ПОДПИСКА НА EMAIL РАССЫЛКУ
+include_once 'ug_ideal-core/Email_subscriptions.php';
+add_action( 'publish_post', 'publish_post_action', 10, 2 );
+function publish_post_action( $post_id, $post ) {
+	$check = true;
+	if (get_post_meta( $post_id, 'email_subscriptions', true ) == 'Y') {
+		$check = false;
+	}
+	if (in_category('blog_articles_subscriptions', $post_id) and $check) {
+		$subscribers_list = (new Email_subscriptions())->subscribers_list;
+		foreach ($subscribers_list as $key => $value) {
+			$mail_data = [
+				'subject' => $post->post_title,
+				'body' => $post->post_title . ' - <a href="http://'.$_SERVER['HTTP_HOST'] . 
+				'/blog_articles/?article='.$post_id.'">подробнее...</a>='.$value,
+				'customer_mail' => $value,
+			];
+			file_get_contents(get_stylesheet_directory_uri().'/ug_ideal-libs/PHPMailer?'.http_build_query($mail_data));
+			sleep(0.1);
+		}
+		add_post_meta($post_id, 'email_subscriptions', 'Y', true);
+	} 
+	// file_put_contents($_SERVER['DOCUMENT_ROOT'].'/test.json', json_encode($mail_data));
 }

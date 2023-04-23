@@ -34,7 +34,9 @@ try {
     // $mail->addBCC('bcc@example.com');
 
     // //Attachments
-    $mail->addAttachment($_GET['file_path']);         //Add attachments
+    if ($_GET['file_path']) {
+        $mail->addAttachment($_GET['file_path']);         //Add attachments
+    }
     // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
 
     //Content
