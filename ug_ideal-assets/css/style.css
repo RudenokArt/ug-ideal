@@ -200,6 +200,7 @@ div, a {
 	width: 100vw;
 	height: 100vh;
 	display: flex;
+	z-index: 1;
 }
 
 .email_subscriptions_popup-inner {
