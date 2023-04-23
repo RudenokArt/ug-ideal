@@ -66,5 +66,3 @@ if (isset($_POST['add_new_email_subscriber'])) {
 
 	});
 </script>
-<?php echo get_stylesheet_directory_uri().'/ug_ideal-libs/PHPMailer?' ?>
-<pre><?php print_r($_SERVER) ?></pre>
