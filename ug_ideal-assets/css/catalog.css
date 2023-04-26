@@ -76,6 +76,10 @@
 	position: relative;
 }
 
+.ug_ideal-galery-image-popup img {
+	max-height: 80vh;
+}
+
 .ug_ideal-galery-image-popup span {
 	cursor: pointer;
 	background: white;
