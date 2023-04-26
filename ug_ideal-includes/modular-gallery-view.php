@@ -42,9 +42,10 @@ $_SESSION['back_page_url'] = $_SERVER['REQUEST_URI'];
 
     <div class="col-lg-3 col-md-4 col-sm-6 col-12 pb-5">
       <div id="gallery-sidebar_toggle">
-        <button class="btn btn-outline-info w-100">
+        <button class="btn btn-lg btn-outline-info w-100">
           <i class="fa fa-bars" aria-hidden="true"></i>
-          <i class="fa fa-chevron-down" aria-hidden="true"></i>
+          <!-- <i class="fa fa-chevron-down" aria-hidden="true"></i> -->
+          <span style="">Каталог</span>
         </button>
       </div>
       <div id="gallery-sidebar">

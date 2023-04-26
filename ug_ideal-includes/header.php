@@ -65,7 +65,7 @@ include_once 'interface_theme.php';
 							<i class="fa fa-envelope-o" aria-hidden="true"></i>
 							<div class="header-drop_menu" style="right: -200px;">
 								<?php foreach ($GLOBALS['company_contacts']->company_email as $key => $value): ?>
-									<a href="tel:<?php echo $value;?>" class="header-drop_menu-item h5 d-block p-2 m-0">
+									<a href="tel:<?php echo $value;?>" class="header-drop_menu-item h5 d-block p-2 m-0 content_color">
 										<?php echo $value; ?>
 									</a>
 								<?php endforeach ?>
@@ -78,11 +78,11 @@ include_once 'interface_theme.php';
 							<i class="fa fa-phone" aria-hidden="true"></i>
 							<div class="header-drop_menu" style="right: -150px;">
 								<?php foreach ($GLOBALS['company_contacts']->company_phones as $key => $value): ?>
-									<a href="tel:<?php echo $value;?>" class="header-drop_menu-item h5 d-block p-2 m-0">
+									<a href="tel:<?php echo $value;?>" class="header-drop_menu-item h5 d-block p-2 m-0 content_color">
 										<?php echo $value; ?>
 									</a>
 								<?php endforeach ?>
-								<div class="text-info p-3">
+								<div class="p-3 content_color">
 									<i class="fa fa-clock-o" aria-hidden="true"></i>
 									<?php echo $GLOBALS['company_contacts']->work_time; ?>
 								</div>
@@ -99,11 +99,11 @@ include_once 'interface_theme.php';
 							</div>
 							<div class="header-drop_menu h6" style="right: -100px;">
 								<?php foreach ($GLOBALS['company_contacts']->company_address as $key => $value): ?>
-									<a href="/contacts/" class="header-drop_menu-item d-block p-2 m-0">
+									<a href="/contacts/" class="header-drop_menu-item d-block p-2 m-0 content_color">
 										<?php echo $value->post_title; ?>
 									</a>
 								<?php endforeach ?>
-								<div class="text-info p-3">
+								<div class="p-3 content_color">
 									<i class="fa fa-clock-o" aria-hidden="true"></i>
 									<?php echo $GLOBALS['company_contacts']->work_time; ?>
 								</div>

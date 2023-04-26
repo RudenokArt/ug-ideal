@@ -7,7 +7,7 @@ if (isset($GLOBALS['admin_current_gallery']) and $GLOBALS['admin_current_gallery
 }
 ?>
 
-<div class="pt-5">
+<div class="pt-5 d-lg-block d-md-block d-sm-none d-none">
 	<?php foreach ($blog_articles->articles_list as $key => $value): ?>
 		<a href="/blog_articles/?article=<?php echo $value->ID;?>" class="pt-3 pb-3 d-block border-top smart_link text-body">
 			<span class=""><?php echo mb_substr($value->post_date, 0, 10); ?></span>

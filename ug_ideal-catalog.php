@@ -163,6 +163,7 @@ include_once 'ug_ideal-includes/header.php';
       speed: 500,
       slidesToShow: 5, 
       slidesToScroll: 1,
+      autoplay: true,
       responsive: [
       {
         breakpoint: 960,
