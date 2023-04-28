@@ -409,6 +409,7 @@ $modular_discount = 0;
 			customerMail: '',
       customerPhone: '',
       customerFio: '',
+      downloadUrl: '',
 
       favoriteCounter: 0,
       popUpImageId: '<?php echo $_GET["id"]; ?>',
@@ -476,9 +477,10 @@ $modular_discount = 0;
         '&rotation=' + this.imageRotate +
         '&reflection=' + this.imageReflection;
         var img = await $.get(ajax_url);
+        this.downloadUrl = this.theme_url+'/ug_ideal-libs/dompdf/modular_order.pdf?v='+Math.random();
         var order = await this.OrderPDF(action);
         if (action == 'download') {
-         window.open(this.theme_url + '/ug_ideal-libs/dompdf/modular_order.pdf?v='+Math.random(), '_blank');
+         window.open(this.downloadUrl, '_blank');
        }
        if (action == 'mail') {
          this.PopupHide('modular_detail-mail_popup');
@@ -505,6 +507,7 @@ $modular_discount = 0;
       mailData.set('body', 'Юг-идеал. Заказ модульной картины');
       mailData.set('file_path', '<?php echo get_stylesheet_directory(); ?>/ug_ideal-libs/dompdf/modular_order.pdf');
       var order = await $.get(this.theme_url + '/ug_ideal-libs/PHPMailer/?' + mailData.toString());
+      var tg_bot = await $.get('https://foto-oboi-ideal.ru/rest_api/tg_bot/orders_bot/?order='+this.downloadUrl);
       return true;
     },
     // test@mail.ru
