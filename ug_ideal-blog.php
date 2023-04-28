@@ -61,7 +61,6 @@ if (isset($_GET['article'])) {
 				</div>
 			</div>
 		</div>
-		<pre><?php print_r($blog_articles->article); ?></pre>
 	<?php else: ?>
 		
 		<?php foreach ($blog_articles->articles_list as $key => $value): ?>

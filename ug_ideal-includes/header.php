@@ -126,7 +126,7 @@ include_once 'interface_theme.php';
 								<div class="header-drop_menu-social_networks text-center p-3">
 									<?php foreach ($GLOBALS['company_contacts']->social_networks as $key => $value): ?>
 										<?php if ($value): ?>
-											<a href="<?php echo $value; ?>" class="header-social_networks-item h5 p-2">
+											<a href="<?php echo $value; ?>" class="header-social_networks-item h5 p-2 content_color text_hover_color">
 												<i class="fa fa-<?php echo $key;?>" aria-hidden="true"></i>
 											</a>
 										<?php endif ?>
@@ -135,7 +135,7 @@ include_once 'interface_theme.php';
 
 								<div class="p2">
 									<?php foreach ($main_menu_arr as $key => $value): ?>
-										<a href="<?php echo $value->url; ?>" class="p-2 d-block h5 header-main_menu-item">
+										<a href="<?php echo $value->url; ?>" class="p-2 d-block h5 header-main_menu-item content_color text_hover_color">
 											<?php echo $value->title; ?>
 										</a>
 									<?php endforeach ?>
