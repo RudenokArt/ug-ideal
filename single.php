@@ -1,3 +1,3 @@
 <?php get_header(); ?>
-<?php print_r($_GET); ?>
+test
 <?php get_footer(); ?>
