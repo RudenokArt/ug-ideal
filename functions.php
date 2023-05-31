@@ -245,6 +245,16 @@ function true_top_menu_page(){
     'admin_interface_theme' // функция, которая выводит содержимое страницы
   );
 
+  add_menu_page(
+    'Яндекс маркет', // тайтл страницы
+    'Яндекс маркет', // текст ссылки в меню
+    'manage_options', // права пользователя, необходимые для доступа к странице
+    'admin-yandex-market', // ярлык страницы
+    'admin_yandex_market', // функция, которая выводит содержимое страницы
+    'dashicons-store', // иконка, в данном случае из Dashicons
+		8 // позиция в меню
+  );
+
 
 } 
 
@@ -294,6 +304,14 @@ function admin_company_contacts () {
 
 function admin_interface_theme () {
 	include_once 'ug_ideal-includes/admin-interface-theme.php';
+}
+
+function admin_yandex_market () {
+	include_once 'ug_ideal-includes/admin-yandex-market.php';
+}
+
+function admin_yandex_market_dimensions () {
+	include_once 'ug_ideal-includes/admin-yandex-market-dimensions.php';
 }
 
 // ПОДПИСКА НА EMAIL РАССЫЛКУ
