@@ -141,15 +141,32 @@ class ModularDimensions {
 
 	public function dimensionsSave () {
 		$arr = $_POST;
-		$json_data = json_encode($arr);
-		$post_id = wp_insert_post([
-			'post_title' => $arr['template_title'],
-			'post_name' => 'modular_dimensions-'.$arr['template_id'],
-			'post_content' => $json_data,
-			'post_status' => 'publish',
-			'post_type' => 'post',
-			'post_category' => [$this->dimensions_category->cat_ID],
+		$check_post = get_posts([
+			'category_name' => $this->dimensions_category->slug,
+			'name' => 'modular_dimensions-'.$arr['template_id'],
 		]);
+		$json_data = json_encode($arr);
+		if (empty($check_post)) {
+			$dimensions = [
+				'post_title' => $arr['template_title'],
+				'post_name' => 'modular_dimensions-'.$arr['template_id'],
+				'post_content' => $json_data,
+				'post_status' => 'publish',
+				'post_type' => 'post',
+				'post_category' => [$this->dimensions_category->cat_ID],
+			];
+		} else {
+			$dimensions = [
+				'ID' => $check_post[0]->ID,
+				'post_title' => $arr['template_title'],
+				'post_name' => 'modular_dimensions-'.$arr['template_id'],
+				'post_content' => $json_data,
+				'post_status' => 'publish',
+				'post_type' => 'post',
+				'post_category' => [$this->dimensions_category->cat_ID],
+			];
+		}
+		$post_id = wp_insert_post($dimensions);
 	}
 
 	public function getDimensionsCategory()	{
