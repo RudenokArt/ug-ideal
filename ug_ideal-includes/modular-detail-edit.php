@@ -1,5 +1,4 @@
 <?php 
-
 $detail_edit = new DetailEdit($_GET['edit']);
 
 ?>
@@ -73,7 +72,135 @@ $detail_edit = new DetailEdit($_GET['edit']);
 	</div>
 	<input type="hidden" v-bind:value="templates_arr[template_index].id" name="template_id">
 	<input type="hidden" v-bind:value="interiors_arr[interior_index].id" name="interior_id">
+
+	<div class="row">
+		<div class="col-12 h5 text-secondary">
+			<div class="alert aletr-light text-center border">
+				Выгрузка в маркет:
+			</div>
+		</div>
+
+		<div class="col-12">
+			<div class="row pb-3">
+				<div class="col-lg-3 col-md-4 col-sm-12">
+					<div class="alert alert-light p-1 m-0">
+						Название товара:
+					</div>				
+				</div>
+				<div class="col-lg-9 col-md-8 col-sm-12">
+					<input v-bind:value="description" name="name" type="text" class="form-control p-1">
+				</div>
+			</div>
+		</div>
+
+		<div class="col-12 pb-3">
+			<div class="row">
+				<div class="col-12">
+					Описание товара:
+				</div>
+				<div class="col-12">
+					<textarea name="description" class="form-control">{{description}}</textarea>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-lg-4 col-md-6 col-sm-12">
+			<div class="row pb-2">
+				<div class="col-6 border-bottom text-end pt-1">
+					Материал:
+				</div>
+				<div class="col-6">
+					<select name="material" class="form-select" v-model="modular_template_mat">
+						<?php foreach ($detail_edit->modular_template_mat as $key => $value): ?>
+							<option><?php echo $value->post_title; ?></option>
+						<?php endforeach ?>
+					</select>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-lg-4 col-md-6 col-sm-12">
+			<div class="row pb-2">
+				<div class="col-6 border-bottom text-end pt-1">
+					Размер:
+				</div>
+				<div class="col-6">
+					<select name="material" class="form-select" v-model="modular_template_size">
+						<?php foreach ($detail_edit->modular_template_size as $key => $value): ?>
+							<option><?php echo $value->post_title; ?></option>
+						<?php endforeach ?>
+					</select>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-lg-4 col-md-6 col-sm-12">
+			<div class="row pb-2">
+				<div class="col-8 border-bottom text-end">
+					Стоимость (руб):
+				</div>
+				<div class="col-4">
+					<input name="price" type="number" class="form-control p-1">
+				</div>
+			</div>
+		</div>
+
+		<div class="col-lg-4 col-md-6 col-sm-12">
+			<div class="row pb-2">
+				<div class="col-8 border-bottom text-end">
+					Длинна в упаковке (см):
+				</div>
+				<div class="col-4">
+					<input name="length" type="number" class="form-control p-1">
+				</div>
+			</div>
+		</div>
+
+		<div class="col-lg-4 col-md-6 col-sm-12">
+			<div class="row pb-2">
+				<div class="col-8 border-bottom text-end">
+					Ширина в упаковке (см):
+				</div>
+				<div class="col-4">
+					<input name="weight" type="number" class="form-control p-1">
+				</div>
+			</div>
+		</div>
+
+		<div class="col-lg-4 col-md-6 col-sm-12">
+			<div class="row pb-2">
+				<div class="col-8 border-bottom text-end">
+					Высота в упаковке (см):
+				</div>
+				<div class="col-4">
+					<input name="height" type="number" class="form-control p-1">
+				</div>
+			</div>
+		</div>
+
+		<div class="col-lg-4 col-md-6 col-sm-12">
+			<div class="row pb-2">
+				<div class="col-8 border-bottom text-end">
+					Вес в упаковке (кг):
+				</div>
+				<div class="col-4">
+					<input name="weight" type="number" class="form-control p-1">
+				</div>
+			</div>
+		</div>
+
+		<div class="col-lg-4 col-md-6 col-sm-12">
+			<button name="ya_save" value="Y" class="btn btn-outline-primary w-100">
+				<i class="fa fa-floppy-o" aria-hidden="true"></i>
+				Сохранить
+			</button>
+		</div>
+
+	</div>
 </form>
+
+
+<pre><?php print_r($_POST) ?></pre>
 
 <script>
 	new Vue ({
@@ -87,8 +214,17 @@ $detail_edit = new DetailEdit($_GET['edit']);
 			horizontalPosition: '<?php echo $detail_edit->left; ?>',
 			imageSize: '<?php echo $detail_edit->width; ?>',
 			imageExpand: '<?php echo $detail_edit->image_expand; ?>',
+
+			modular_template_mat: '',
+			modular_template_size: '',
+
 		},
 		computed: {
+			description: function () {
+				return 'Модульная картина: ' + this.templates_arr[this.template_index].slug +
+				' Материал: ' + this.modular_template_mat + 
+				' Размер: ' + this.modular_template_size;
+			},
 			imageStyle: function () {
 				var style = {
 					'width': + this.imageSize + '%',
@@ -111,6 +247,7 @@ $detail_edit = new DetailEdit($_GET['edit']);
 class DetailEdit {
 	
 	function __construct($post_id) {
+
 		$this->post_id = $post_id;
 		$this->post = get_posts(['p' => $this->post_id])[0];
 		$this->catalog_image_url = $this->getCatalogImageUrl();
@@ -125,6 +262,10 @@ class DetailEdit {
 		if (isset($_POST['detail_edit']) and $_POST['detail_edit'] == 'Y') {
 			$this->updatePostContent();
 		}
+
+		$this->modular_template_mat = get_posts(['category_name' => 'modular_template_mat',]);
+		$this->modular_template_size = get_posts(['category_name' => 'modular_template_size',]);
+
 	}
 
 	function postContentParse () {

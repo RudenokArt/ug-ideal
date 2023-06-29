@@ -134,6 +134,39 @@ function remove_theme_updates($value) {
 add_filter('site_transient_update_themes', 'remove_theme_updates');
 
 
+add_action( 'admin_menu', 'admin_yandex', 25 );
+function admin_yandex(){
+
+  add_menu_page(
+    'Яндекс маркет', // тайтл страницы
+    'Яндекс маркет', // текст ссылки в меню
+    'manage_options', // права пользователя, необходимые для доступа к странице
+    'admin-yandex-market', // ярлык страницы
+    'admin_yandex_market', // функция, которая выводит содержимое страницы
+    'dashicons-store', // иконка, в данном случае из Dashicons
+		7 // позиция в меню
+  );
+
+  //   add_submenu_page(
+	// 	'admin-yandex-market',
+  //   'Яндекс маркет - загрузка', // тайтл страницы
+  //   'Яндекс маркет - загрузка', // текст ссылки в меню
+  //   'manage_options', // права пользователя, необходимые для доступа к странице
+  //   'admin-yandex-market-uploader', // ярлык страницы
+  //   'admin_yandex_market_uploader' // функция, которая выводит содержимое страницы
+  // );
+
+}
+
+function admin_yandex_market () {
+	include_once 'ug_ideal-includes/admin-yandex-market.php';
+}
+
+// function admin_yandex_market_uploader (){
+// 	include_once 'ug_ideal-includes/admin-yandex-market-uploader.php';
+// }
+
+
 add_action( 'admin_menu', 'true_top_menu_page', 25 );
 function true_top_menu_page(){
 
@@ -144,7 +177,7 @@ function true_top_menu_page(){
 		'ug_ideal_admin', // ярлык страницы
 		'ug_ideal_admin', // функция, которая выводит содержимое страницы
 		'dashicons-admin-generic', // иконка, в данном случае из Dashicons
-		7 // позиция в меню
+		8 // позиция в меню
 	);
 
 	add_submenu_page(
@@ -245,17 +278,6 @@ function true_top_menu_page(){
     'admin_interface_theme' // функция, которая выводит содержимое страницы
   );
 
-  add_menu_page(
-    'Яндекс маркет', // тайтл страницы
-    'Яндекс маркет', // текст ссылки в меню
-    'manage_options', // права пользователя, необходимые для доступа к странице
-    'admin-yandex-market', // ярлык страницы
-    'admin_yandex_market', // функция, которая выводит содержимое страницы
-    'dashicons-store', // иконка, в данном случае из Dashicons
-		8 // позиция в меню
-  );
-
-
 } 
 
 function ug_ideal_admin () {
@@ -306,13 +328,6 @@ function admin_interface_theme () {
 	include_once 'ug_ideal-includes/admin-interface-theme.php';
 }
 
-function admin_yandex_market () {
-	include_once 'ug_ideal-includes/admin-yandex-market.php';
-}
-
-function admin_yandex_market_dimensions () {
-	include_once 'ug_ideal-includes/admin-yandex-market-dimensions.php';
-}
 
 // ПОДПИСКА НА EMAIL РАССЫЛКУ
 include_once 'ug_ideal-core/Email_subscriptions.php';
