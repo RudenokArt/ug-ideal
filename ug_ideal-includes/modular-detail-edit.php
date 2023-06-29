@@ -73,7 +73,7 @@ $detail_edit = new DetailEdit($_GET['edit']);
 	<input type="hidden" v-bind:value="templates_arr[template_index].id" name="template_id">
 	<input type="hidden" v-bind:value="interiors_arr[interior_index].id" name="interior_id">
 
-	<div class="row">
+	<div class="row pt-5">
 		<div class="col-12 h5 text-secondary">
 			<div class="alert aletr-light text-center border">
 				Выгрузка в маркет:
@@ -88,7 +88,7 @@ $detail_edit = new DetailEdit($_GET['edit']);
 					</div>				
 				</div>
 				<div class="col-lg-9 col-md-8 col-sm-12">
-					<input v-bind:value="description" name="name" type="text" class="form-control p-1">
+					<input v-bind:value="description" name="product" type="text" class="form-control p-1">
 				</div>
 			</div>
 		</div>
@@ -125,7 +125,7 @@ $detail_edit = new DetailEdit($_GET['edit']);
 					Размер:
 				</div>
 				<div class="col-6">
-					<select name="material" class="form-select" v-model="modular_template_size">
+					<select name="size" class="form-select" v-model="modular_template_size">
 						<?php foreach ($detail_edit->modular_template_size as $key => $value): ?>
 							<option><?php echo $value->post_title; ?></option>
 						<?php endforeach ?>
