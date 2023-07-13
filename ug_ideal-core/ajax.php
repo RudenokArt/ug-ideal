@@ -6,6 +6,10 @@ ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
 
+if (isset($_GET['ya_market'])) {
+  include_once 'YandexMarket.php';
+}
+
 if (isset($_GET['modular_order_image'])) {
   include_once 'ModularOrderImage.php';
 }

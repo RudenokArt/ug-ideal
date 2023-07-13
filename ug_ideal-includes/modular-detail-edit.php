@@ -4,7 +4,7 @@ $detail_edit = new DetailEdit($_GET['edit']);
 ?>
 <link rel="stylesheet" href="<?php echo $theme_url;?>/ug_ideal-assets/css/modular-detail-edit.css">
 <form action="" method="post" class="container pt-5 pb-5" id="detail_edit">
-	<div class="row">
+	<div class="row pb-5">
 		<div class="col-lg-6 col-md-6 col-sm-12 col-12 pt-5" style="position: relative">
 			<div class="modular-edit-image_wrapper">
 				<img src="<?php echo $photo_galery_url.$detail_edit->catalog_image_url;?>"
@@ -140,7 +140,7 @@ $detail_edit = new DetailEdit($_GET['edit']);
 					Стоимость (руб):
 				</div>
 				<div class="col-4">
-					<input name="price" type="number" class="form-control p-1">
+					<input name="market_price" type="number" class="form-control p-1">
 				</div>
 			</div>
 		</div>
@@ -151,7 +151,7 @@ $detail_edit = new DetailEdit($_GET['edit']);
 					Длинна в упаковке (см):
 				</div>
 				<div class="col-4">
-					<input name="length" type="number" class="form-control p-1">
+					<input name="market_length" type="number" class="form-control p-1">
 				</div>
 			</div>
 		</div>
@@ -162,7 +162,7 @@ $detail_edit = new DetailEdit($_GET['edit']);
 					Ширина в упаковке (см):
 				</div>
 				<div class="col-4">
-					<input name="weight" type="number" class="form-control p-1">
+					<input name="market_width" type="number" class="form-control p-1">
 				</div>
 			</div>
 		</div>
@@ -173,7 +173,7 @@ $detail_edit = new DetailEdit($_GET['edit']);
 					Высота в упаковке (см):
 				</div>
 				<div class="col-4">
-					<input name="height" type="number" class="form-control p-1">
+					<input name="market_height" type="number" class="form-control p-1">
 				</div>
 			</div>
 		</div>
@@ -184,23 +184,20 @@ $detail_edit = new DetailEdit($_GET['edit']);
 					Вес в упаковке (кг):
 				</div>
 				<div class="col-4">
-					<input name="weight" type="number" class="form-control p-1">
+					<input name="market_weight" type="number" class="form-control p-1">
 				</div>
 			</div>
 		</div>
 
 		<div class="col-lg-4 col-md-6 col-sm-12">
-			<button name="ya_save" value="Y" class="btn btn-outline-primary w-100">
+			<button v-on:click="yaSave" type="button" class="btn btn-outline-primary w-100">
 				<i class="fa fa-floppy-o" aria-hidden="true"></i>
-				Сохранить
+				Сохранить в каталог
 			</button>
 		</div>
 
 	</div>
 </form>
-
-
-<pre><?php print_r($_POST) ?></pre>
 
 <script>
 	new Vue ({
@@ -219,11 +216,60 @@ $detail_edit = new DetailEdit($_GET['edit']);
 			modular_template_size: '',
 
 		},
+
+		methods: {
+			yaSave: async function () {
+				var frmDt = new FormData(document.querySelector('#detail_edit'));
+				frmDt.set('image', '<?php echo $detail_edit->img_json; ?>');
+				frmDt.set('template', JSON.stringify(this.templates_arr[this.template_index]));
+				frmDt.set('folder', '<?php echo $photo_galery_url ?>');
+				var dataArr = Array.from(frmDt);
+				var imgQueryString = new URLSearchParams(dataArr).toString();
+				var image = await $.get('<?php echo $theme_url;?>/ug_ideal-core/ModularOrderImage.php?'+imgQueryString);
+				var productParams = new URLSearchParams();
+				productParams.set('ya_market', 'Y');
+				productParams.set('save', 'Y');
+				productParams.set('post_slug', 'yandex_modular_<?php echo $detail_edit->post->post_name;?>');
+				productParams.set('shopSku', 'yandex_modular_<?php echo $detail_edit->post->post_name;?>');
+				productParams.set(
+					'pictures',
+					"<?php if (isset($_SERVER['HTTPS'])) {
+						$http_protocol = 'https://';
+					} else {
+						$http_protocol = 'http://';
+					}
+					echo $http_protocol.$_SERVER['HTTP_HOST']; ?>/wp-content/uploads/yandex_market/" + 
+					"yandex_modular_<?php echo $detail_edit->post->post_name;?>.jpg"
+					);
+				productParams.set('name', frmDt.get('product'));
+				productParams.set('description', frmDt.get('description'));
+				productParams.set('vendorCode', '<?php echo $detail_edit->post->post_title;?>');
+				productParams.set('length', frmDt.get('market_length'));
+				productParams.set('width', frmDt.get('market_width'));
+				productParams.set('height', frmDt.get('market_height'));
+				productParams.set('weight', frmDt.get('market_weight'));
+				productParams.set('price', frmDt.get('market_price'));
+				productParams.set(
+					'urls',
+					document.location.origin +
+					document.location.pathname +
+					'?id=<?php echo $detail_edit->post->post_name; ?>'
+					);
+				var productQueryString = productParams.toString();
+				var product = await $.get('<?php echo $theme_url;?>/ug_ideal-core/ajax.php?'+productQueryString);
+				console.log(product);
+				if (product) {
+					alert('Товар добавлен в каталог!');
+				}
+			}
+		},
+
 		computed: {
 			description: function () {
 				return 'Модульная картина: ' + this.templates_arr[this.template_index].slug +
 				' Материал: ' + this.modular_template_mat + 
-				' Размер: ' + this.modular_template_size;
+				' Размер: ' + this.modular_template_size + 
+				' Артикул: <?php echo $detail_edit->post->post_title;?>';
 			},
 			imageStyle: function () {
 				var style = {
@@ -238,6 +284,7 @@ $detail_edit = new DetailEdit($_GET['edit']);
 		},
 	});
 </script>
+
 
 <?php 
 
@@ -265,7 +312,6 @@ class DetailEdit {
 
 		$this->modular_template_mat = get_posts(['category_name' => 'modular_template_mat',]);
 		$this->modular_template_size = get_posts(['category_name' => 'modular_template_size',]);
-
 	}
 
 	function postContentParse () {
@@ -342,11 +388,12 @@ class DetailEdit {
 	function getCatalogImageUrl () {
 		global $wpdb;
 		$img = $wpdb->get_results(
-			'SELECT `image_url` 
+			'SELECT `image_url`, `filetype` 
 			FROM `wp_bwg_image`
 			WHERE `id`='.$this->post->post_name
 		);
 		if ($img) {
+			$this->img_json = json_encode($img[0], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 			return $img[0]->image_url;
 		}
 		return false;
