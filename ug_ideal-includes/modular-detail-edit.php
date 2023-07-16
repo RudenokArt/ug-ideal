@@ -1,6 +1,6 @@
 <?php 
 $detail_edit = new DetailEdit($_GET['edit']);
-
+$yandex_market_slug = 'yandex_modular-'.(string)time();
 ?>
 <link rel="stylesheet" href="<?php echo $theme_url;?>/ug_ideal-assets/css/modular-detail-edit.css">
 <form action="" method="post" class="container pt-5 pb-5" id="detail_edit">
@@ -229,8 +229,8 @@ $detail_edit = new DetailEdit($_GET['edit']);
 				var productParams = new URLSearchParams();
 				productParams.set('ya_market', 'Y');
 				productParams.set('save', 'Y');
-				productParams.set('post_slug', 'yandex_modular_<?php echo $detail_edit->post->post_name;?>');
-				productParams.set('shopSku', 'yandex_modular_<?php echo $detail_edit->post->post_name;?>');
+				productParams.set('post_slug', '<?php echo $yandex_market_slug;?>');
+				productParams.set('shopSku', '<?php echo $yandex_market_slug;?>');
 				productParams.set(
 					'pictures',
 					"<?php if (isset($_SERVER['HTTPS'])) {
@@ -239,7 +239,7 @@ $detail_edit = new DetailEdit($_GET['edit']);
 						$http_protocol = 'http://';
 					}
 					echo $http_protocol.$_SERVER['HTTP_HOST']; ?>/wp-content/uploads/yandex_market/" + 
-					"yandex_modular_<?php echo $detail_edit->post->post_name;?>.jpg"
+					"<?php echo $yandex_market_slug;?>.jpg"
 					);
 				productParams.set('name', frmDt.get('product'));
 				productParams.set('description', frmDt.get('description'));

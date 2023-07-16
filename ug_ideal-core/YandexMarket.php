@@ -40,8 +40,8 @@ class YandexMarket {
 	}
 
 	function productSave () {
-
-		copy('order_image.jpg', $_SERVER['DOCUMENT_ROOT'].'/wp-content/uploads/yandex_market/'.$_GET['pictures'].'.jpg');
+		
+		copy('order_image.jpg', $_SERVER['DOCUMENT_ROOT'].'/wp-content/uploads/yandex_market/'.$_GET['shopSku'].'.jpg');
 
 		$postArr = [
 			'post_name' => $_GET['post_slug'],
@@ -100,9 +100,9 @@ class YandexMarket {
 						"availability" => "ACTIVE", 
 						"certificate" => "" 
 					], 
-					"basicPrice" => (int) $_GET['price'],
 				] 
-			] 
+			],
+			"basicPrice" => (int) $_GET['price'],
 		]; 
 		return json_encode($arr, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 	}
