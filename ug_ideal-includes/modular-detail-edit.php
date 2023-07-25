@@ -3,201 +3,208 @@ $detail_edit = new DetailEdit($_GET['edit']);
 $yandex_market_slug = 'yandex_modular-'.(string)time();
 ?>
 <link rel="stylesheet" href="<?php echo $theme_url;?>/ug_ideal-assets/css/modular-detail-edit.css">
-<form action="" method="post" class="container pt-5 pb-5" id="detail_edit">
-	<div class="row pb-5">
-		<div class="col-lg-6 col-md-6 col-sm-12 col-12 pt-5" style="position: relative">
-			<div class="modular-edit-image_wrapper">
-				<img src="<?php echo $photo_galery_url.$detail_edit->catalog_image_url;?>"
-				v-bind:style="imageStyle" class="modular-edit-image" alt="">
-				<img style="opacity: 0.8;"
-				v-bind:src="`<?php echo $photo_galery_url;?>${templates_arr[template_index].image_url}`" alt="">
-			</div>
-			<img v-if="interiors_arr[interior_index].image_url"
-			v-bind:src="`<?php echo $photo_galery_url;?>${interiors_arr[interior_index].image_url}`"
-			class="modular-edit-interior" alt="">	
-		</div>
-		<div class="col-lg-6 col-md-6 col-sm-12 col-12 pt-5">
-			<div class="row pb-5">
-				<div class="col-6">
-					<a href="<?php echo $_SESSION['back_page_url'];?>" class="btn btn-outline-warning w-100">
-						<i class="fa fa-times" aria-hidden="true"></i>
-						Отмена
-					</a>
+<div id="detail_edit">
+	<form action="" method="post" class="container pt-5 pb-5" id="detail_edit-gallery_form">
+		<div class="row pb-5">
+			<div class="col-lg-6 col-md-6 col-sm-12 col-12 pt-5" style="position: relative">
+				<div class="modular-edit-image_wrapper">
+					<img src="<?php echo $photo_galery_url.$detail_edit->catalog_image_url;?>"
+					v-bind:style="imageStyle" class="modular-edit-image" alt="">
+					<img style="opacity: 0.8;"
+					v-bind:src="`<?php echo $photo_galery_url;?>${templates_arr[template_index].image_url}`" alt="">
 				</div>
-				<div class="col-6">
-					<button class="btn btn-outline-success w-100" name="detail_edit" value="Y">
-						<i class="fa fa-floppy-o" aria-hidden="true"></i>
-						Сохранить
-					</button>
-				</div>
+				<img v-if="interiors_arr[interior_index].image_url"
+				v-bind:src="`<?php echo $photo_galery_url;?>${interiors_arr[interior_index].image_url}`"
+				class="modular-edit-interior" alt="">	
 			</div>
-			Шаблон для изображения:
-			<select v-model="template_index" class="form-select" name="template">
-				<option v-for="(item, index) in templates_arr" v-bind:value="index">
-					{{item.slug}}
-				</option>
-			</select>
-			Интерьер для изображения:
-			<select v-model="interior_index" class="form-select" name="interior">
-				<option v-for="(item, index) in interiors_arr" v-bind:value="index">
-					{{item.slug}}
-				</option>
-			</select>
-			<div class="text-info pt-4">
-				<i class="fa fa-arrows-v" aria-hidden="true"></i>
-				{{verticalPosition}}
-				<label class="form-label w-100">
-					<input v-model="verticalPosition" type="range" name="top" class="form-range w-100" min="-50" max="50">
-				</label>
-				<i class="fa fa-arrows-h" aria-hidden="true"></i>
-				{{horizontalPosition}}
-				<label class="form-label w-100">
-					<input v-model="horizontalPosition" type="range" name="left" class="form-range w-100" min="-50" max="50">
-				</label>
-				<i class="fa fa-expand" aria-hidden="true"></i>
-				{{imageSize}}
-				<label class="form-label w-100">
-					<input v-model="imageSize" type="range" name="width" class="form-range w-100" min="50" max="150">
-				</label>
-
-				<div class="form-check form-switch">
-					<input name="image_expand" v-model="imageExpand" class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
-					<label class="form-check-label" for="flexSwitchCheckChecked">
-						Растянуть изображение на весь блок
+			<div class="col-lg-6 col-md-6 col-sm-12 col-12 pt-5">
+				<div class="row pb-5">
+					<div class="col-6">
+						<a href="<?php echo $_SESSION['back_page_url'];?>" class="btn btn-outline-warning w-100">
+							<i class="fa fa-times" aria-hidden="true"></i>
+							Отмена
+						</a>
+					</div>
+					<div class="col-6">
+						<button class="btn btn-outline-success w-100" name="detail_edit" value="Y">
+							<i class="fa fa-floppy-o" aria-hidden="true"></i>
+							Сохранить
+						</button>
+					</div>
+				</div>
+				Шаблон для изображения:
+				<select v-model="template_index" class="form-select" name="template">
+					<option v-for="(item, index) in templates_arr" v-bind:value="index">
+						{{item.slug}}
+					</option>
+				</select>
+				Интерьер для изображения:
+				<select v-model="interior_index" class="form-select" name="interior">
+					<option v-for="(item, index) in interiors_arr" v-bind:value="index">
+						{{item.slug}}
+					</option>
+				</select>
+				<div class="text-info pt-4">
+					<i class="fa fa-arrows-v" aria-hidden="true"></i>
+					{{verticalPosition}}
+					<label class="form-label w-100">
+						<input v-model="verticalPosition" type="range" name="top" class="form-range w-100" min="-50" max="50">
 					</label>
-				</div>
+					<i class="fa fa-arrows-h" aria-hidden="true"></i>
+					{{horizontalPosition}}
+					<label class="form-label w-100">
+						<input v-model="horizontalPosition" type="range" name="left" class="form-range w-100" min="-50" max="50">
+					</label>
+					<i class="fa fa-expand" aria-hidden="true"></i>
+					{{imageSize}}
+					<label class="form-label w-100">
+						<input v-model="imageSize" type="range" name="width" class="form-range w-100" min="50" max="150">
+					</label>
 
-			</div>
-		</div>
-	</div>
-	<input type="hidden" v-bind:value="templates_arr[template_index].id" name="template_id">
-	<input type="hidden" v-bind:value="interiors_arr[interior_index].id" name="interior_id">
+					<div class="form-check form-switch">
+						<input name="image_expand" v-model="imageExpand" class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
+						<label class="form-check-label" for="flexSwitchCheckChecked">
+							Растянуть изображение на весь блок
+						</label>
+					</div>
 
-	<div class="row pt-5">
-		<div class="col-12 h5 text-secondary">
-			<div class="alert aletr-light text-center border">
-				Выгрузка в маркет:
-			</div>
-		</div>
-
-		<div class="col-12">
-			<div class="row pb-3">
-				<div class="col-lg-3 col-md-4 col-sm-12">
-					<div class="alert alert-light p-1 m-0">
-						Название товара:
-					</div>				
-				</div>
-				<div class="col-lg-9 col-md-8 col-sm-12">
-					<input v-bind:value="description" name="product" type="text" class="form-control p-1">
 				</div>
 			</div>
 		</div>
+		<input type="hidden" v-bind:value="templates_arr[template_index].id" name="template_id">
+		<input type="hidden" v-bind:value="interiors_arr[interior_index].id" name="interior_id">
 
-		<div class="col-12 pb-3">
-			<div class="row">
-				<div class="col-12">
-					Описание товара:
-				</div>
-				<div class="col-12">
-					<textarea name="description" class="form-control">{{description}}</textarea>
+	</form>
+
+	<form action="" method="post" v-on:submit.prevent="yaSave"  id="detail_edit-market_form" class="container">
+		<div class="row pt-5">
+			<div class="col-12 h5 text-secondary">
+				<div class="alert aletr-light text-center border">
+					Выгрузка в маркет:
 				</div>
 			</div>
-		</div>
 
-		<div class="col-lg-4 col-md-6 col-sm-12">
-			<div class="row pb-2">
-				<div class="col-6 border-bottom text-end pt-1">
-					Материал:
-				</div>
-				<div class="col-6">
-					<select name="material" class="form-select" v-model="modular_template_mat">
-						<?php foreach ($detail_edit->modular_template_mat as $key => $value): ?>
-							<option><?php echo $value->post_title; ?></option>
-						<?php endforeach ?>
-					</select>
+			<div class="col-12">
+				<div class="row pb-3">
+					<div class="col-lg-3 col-md-4 col-sm-12">
+						<div class="alert alert-light p-1 m-0">
+							Название товара:
+						</div>				
+					</div>
+					<div class="col-lg-9 col-md-8 col-sm-12">
+						<input v-bind:value="description" name="product" type="text" class="form-control p-1" required>
+					</div>
 				</div>
 			</div>
-		</div>
 
-		<div class="col-lg-4 col-md-6 col-sm-12">
-			<div class="row pb-2">
-				<div class="col-6 border-bottom text-end pt-1">
-					Размер:
-				</div>
-				<div class="col-6">
-					<select name="size" class="form-select" v-model="modular_template_size">
-						<?php foreach ($detail_edit->modular_template_size as $key => $value): ?>
-							<option><?php echo $value->post_title; ?></option>
-						<?php endforeach ?>
-					</select>
+			<div class="col-12 pb-3">
+				<div class="row">
+					<div class="col-12">
+						Описание товара:
+					</div>
+					<div class="col-12">
+						<textarea name="description" class="form-control" required>{{description}}</textarea>
+					</div>
 				</div>
 			</div>
-		</div>
 
-		<div class="col-lg-4 col-md-6 col-sm-12">
-			<div class="row pb-2">
-				<div class="col-8 border-bottom text-end">
-					Стоимость (руб):
-				</div>
-				<div class="col-4">
-					<input name="market_price" type="number" class="form-control p-1">
+			<div class="col-lg-4 col-md-6 col-sm-12">
+				<div class="row pb-2">
+					<div class="col-6 border-bottom text-end pt-1">
+						Материал:
+					</div>
+					<div class="col-6">
+						<select name="material" class="form-select" v-model="modular_template_mat" required>
+							<option v-for="(item, index) in mat_arr" v-bind:value="index">
+								{{item.post_title}}
+							</option>
+						</select>
+					</div>
 				</div>
 			</div>
-		</div>
 
-		<div class="col-lg-4 col-md-6 col-sm-12">
-			<div class="row pb-2">
-				<div class="col-8 border-bottom text-end">
-					Длинна в упаковке (см):
-				</div>
-				<div class="col-4">
-					<input name="market_length" type="number" class="form-control p-1">
+			<div class="col-lg-4 col-md-6 col-sm-12">
+				<div class="row pb-2">
+					<div class="col-6 border-bottom text-end pt-1">
+						Размер:
+					</div>
+					<div class="col-6">
+						<select class="form-select" v-model="modular_template_size" required>
+							<option v-for="(item, index) in size_arr" v-bind:value="index">
+								{{item.post_title}}
+							</option>
+						</select>
+					</div>
 				</div>
 			</div>
-		</div>
 
-		<div class="col-lg-4 col-md-6 col-sm-12">
-			<div class="row pb-2">
-				<div class="col-8 border-bottom text-end">
-					Ширина в упаковке (см):
-				</div>
-				<div class="col-4">
-					<input name="market_width" type="number" class="form-control p-1">
+			<div class="col-lg-4 col-md-6 col-sm-12">
+				<div class="row pb-2">
+					<div class="col-8 border-bottom text-end">
+						Стоимость (руб):
+					</div>
+					<div class="col-4">
+						<input name="market_price" type="number" class="form-control p-1" required v-bind:value="currentPrice">
+					</div>
 				</div>
 			</div>
-		</div>
 
-		<div class="col-lg-4 col-md-6 col-sm-12">
-			<div class="row pb-2">
-				<div class="col-8 border-bottom text-end">
-					Высота в упаковке (см):
-				</div>
-				<div class="col-4">
-					<input name="market_height" type="number" class="form-control p-1">
-				</div>
-			</div>
-		</div>
-
-		<div class="col-lg-4 col-md-6 col-sm-12">
-			<div class="row pb-2">
-				<div class="col-8 border-bottom text-end">
-					Вес в упаковке (кг):
-				</div>
-				<div class="col-4">
-					<input name="market_weight" type="number" class="form-control p-1">
+			<div class="col-lg-4 col-md-6 col-sm-12">
+				<div class="row pb-2">
+					<div class="col-8 border-bottom text-end">
+						Длинна в упаковке (см):
+					</div>
+					<div class="col-4">
+						<input name="market_length" min="1" step="1" type="number" class="form-control p-1" required>
+					</div>
 				</div>
 			</div>
-		</div>
 
-		<div class="col-lg-4 col-md-6 col-sm-12">
-			<button v-on:click="yaSave" type="button" class="btn btn-outline-primary w-100">
-				<i class="fa fa-floppy-o" aria-hidden="true"></i>
-				Сохранить в каталог
-			</button>
-		</div>
+			<div class="col-lg-4 col-md-6 col-sm-12">
+				<div class="row pb-2">
+					<div class="col-8 border-bottom text-end">
+						Ширина в упаковке (см):
+					</div>
+					<div class="col-4">
+						<input name="market_width" min="1" step="1" type="number" class="form-control p-1" required>
+					</div>
+				</div>
+			</div>
 
-	</div>
-</form>
+			<div class="col-lg-4 col-md-6 col-sm-12">
+				<div class="row pb-2">
+					<div class="col-8 border-bottom text-end">
+						Высота в упаковке (см):
+					</div>
+					<div class="col-4">
+						<input name="market_height" min="1" step="1" type="number" class="form-control p-1" required>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-lg-4 col-md-6 col-sm-12">
+				<div class="row pb-2">
+					<div class="col-8 border-bottom text-end">
+						Вес в упаковке (кг):
+					</div>
+					<div class="col-4">
+						<input name="market_weight" min="1" step="1" type="number" class="form-control p-1" required>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-lg-4 col-md-6 col-sm-12">
+				<button class="btn btn-outline-primary w-100">
+					<i class="fa fa-floppy-o" aria-hidden="true"></i>
+					Сохранить в каталог
+				</button>
+			</div>
+
+		</div>
+	</form>
+
+</div>
+
 
 <script>
 	new Vue ({
@@ -212,18 +219,21 @@ $yandex_market_slug = 'yandex_modular-'.(string)time();
 			imageSize: '<?php echo $detail_edit->width; ?>',
 			imageExpand: '<?php echo $detail_edit->image_expand; ?>',
 
-			modular_template_mat: '',
-			modular_template_size: '',
-
+			modular_template_mat: 0,
+			modular_template_size: 0,
+			price_arr: JSON.parse('<?php echo $detail_edit->modular_price_json;?>'),
+			size_arr: JSON.parse('<?php echo $detail_edit->modular_template_size_json;?>'),
+			mat_arr: JSON.parse('<?php echo $detail_edit->modular_template_mat_json;?>'),
 		},
 
 		methods: {
 			yaSave: async function () {
-				var frmDt = new FormData(document.querySelector('#detail_edit'));
+				var frmDt = new FormData(document.querySelector('#detail_edit-gallery_form'));
+				var frmDtM = new FormData(document.querySelector('#detail_edit-market_form'));
 				frmDt.set('image', '<?php echo $detail_edit->img_json; ?>');
 				frmDt.set('template', JSON.stringify(this.templates_arr[this.template_index]));
 				frmDt.set('folder', '<?php echo $photo_galery_url ?>');
-				var dataArr = Array.from(frmDt);
+				var dataArr = Array.from(frmDt).concat(Array.from(frmDtM));
 				var imgQueryString = new URLSearchParams(dataArr).toString();
 				var image = await $.get('<?php echo $theme_url;?>/ug_ideal-core/ModularOrderImage.php?'+imgQueryString);
 				var productParams = new URLSearchParams();
@@ -241,14 +251,14 @@ $yandex_market_slug = 'yandex_modular-'.(string)time();
 					echo $http_protocol.$_SERVER['HTTP_HOST']; ?>/wp-content/uploads/yandex_market/" + 
 					"<?php echo $yandex_market_slug;?>.jpg"
 					);
-				productParams.set('name', frmDt.get('product'));
-				productParams.set('description', frmDt.get('description'));
+				productParams.set('name', frmDtM.get('product'));
+				productParams.set('description', frmDtM.get('description'));
 				productParams.set('vendorCode', '<?php echo $detail_edit->post->post_title;?>');
-				productParams.set('length', frmDt.get('market_length'));
-				productParams.set('width', frmDt.get('market_width'));
-				productParams.set('height', frmDt.get('market_height'));
-				productParams.set('weight', frmDt.get('market_weight'));
-				productParams.set('price', frmDt.get('market_price'));
+				productParams.set('length', frmDtM.get('market_length'));
+				productParams.set('width', frmDtM.get('market_width'));
+				productParams.set('height', frmDtM.get('market_height'));
+				productParams.set('weight', frmDtM.get('market_weight'));
+				productParams.set('price', frmDtM.get('market_price'));
 				productParams.set(
 					'urls',
 					document.location.origin +
@@ -265,10 +275,22 @@ $yandex_market_slug = 'yandex_modular-'.(string)time();
 		},
 
 		computed: {
+			currentPrice: function () {
+				var size = this.size_arr[this.modular_template_size];
+				var price = this.price_arr[this.templates_arr[this.template_index].id];
+				if (price) {
+					if (this.mat_arr[this.modular_template_mat].post_content) {
+						return Math.round(Number(price[size.ID]) * Number(this.mat_arr[this.modular_template_mat].post_content) / 100 + Number(price[size.ID]));
+					}
+					return price[size.ID];
+				}
+				return price;
+			},
+
 			description: function () {
 				return 'Модульная картина: ' + this.templates_arr[this.template_index].slug +
-				' Материал: ' + this.modular_template_mat + 
-				' Размер: ' + this.modular_template_size + 
+				' Материал: ' + this.mat_arr[this.modular_template_mat].post_title + 
+				' Размер: ' + this.size_arr[this.modular_template_size].post_title + 
 				' Артикул: <?php echo $detail_edit->post->post_title;?>';
 			},
 			imageStyle: function () {
@@ -311,7 +333,17 @@ class DetailEdit {
 		}
 
 		$this->modular_template_mat = get_posts(['category_name' => 'modular_template_mat',]);
+		$this->modular_template_mat_json = json_encode($this->modular_template_mat);
+
 		$this->modular_template_size = get_posts(['category_name' => 'modular_template_size',]);
+		$this->modular_template_size_json = json_encode($this->modular_template_size);
+
+		$this->modular_price_arr = get_posts(['category_name' => 'modular_template_price',]);
+		foreach ($this->modular_price_arr as $key => $value) {
+			$this->modular_price_list[$value->post_name] = json_decode($value->post_content, true);
+		}
+		$this->modular_price_json = json_encode($this->modular_price_list);
+		
 	}
 
 	function postContentParse () {
