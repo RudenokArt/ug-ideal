@@ -167,7 +167,7 @@ $_SESSION['back_page_url'] = $_SERVER['REQUEST_URI'];
     </a>
   <?php endif ?>
 <?php endif ?>    
-<hr>
+
 </div>
 <?php endforeach ?>
 
@@ -182,7 +182,7 @@ $_SESSION['back_page_url'] = $_SERVER['REQUEST_URI'];
       <ul class="pagination p-0 m-0">
         <?php if ($modular_gallery_view->pagination['paged'] != 1): ?>
           <li class="page-item">
-            <a href="?<?php echo $_SERVER['QUERY_STRING'];?>&pageN=<?php echo ($modular_gallery_view->pagination['paged']-1);?>" class="page-link" aria-label="Previous">
+            <a href="?<?php echo $_SERVER['QUERY_STRING'];?>&pageN=<?php echo ($modular_gallery_view->pagination['paged']-1);?>" class="page-link h-100 pt-2" aria-label="Previous">
               <span aria-hidden="true">
                 <i class="fa fa-chevron-left" aria-hidden="true"></i>
               </span>
@@ -209,7 +209,7 @@ $_SESSION['back_page_url'] = $_SERVER['REQUEST_URI'];
     <?php if ($modular_gallery_view->pagination['paged'] != $modular_gallery_view->pagination['max_num_pages']): ?>
       <li class="page-item">
         <a
-        href="?<?php echo $_SERVER['QUERY_STRING'];?>&pageN=<?php echo ($modular_gallery_view->pagination['paged']+1);?>" aria-label="Next" class="page-link" >
+        href="?<?php echo $_SERVER['QUERY_STRING'];?>&pageN=<?php echo ($modular_gallery_view->pagination['paged']+1);?>" aria-label="Next" class="page-link h-100 pt-2" >
         <span aria-hidden="true">
           <i class="fa fa-chevron-right" aria-hidden="true"></i>
         </span>
