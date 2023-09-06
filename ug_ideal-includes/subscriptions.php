@@ -47,7 +47,12 @@ if (isset($_POST['add_new_email_subscriber'])) {
 
 <?php if (!$_SESSION['subscriptions_popup']): ?>
 	<?php $_SESSION['subscriptions_popup'] = true; ?>
-	<script>$('#subscriptions_popup').slideDown(5000, 'swing');</script>
+	<script>
+		setTimeout(function () {
+			$('#subscriptions_popup').slideDown(5000, 'swing');
+		}, 10000);
+	
+</script>
 <?php endif ?>
 <script>
 	$(function () {
